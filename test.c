@@ -84,11 +84,38 @@ int test_l_str_slice() {
     return strcmp(out_p, "Greetings;;From;This;Code;") == 0 ? 1 : 0;
 }
 
+int test_l_str_is_surrc() {
+	int test_ok = 0;
+	char str[64], *str_p;
+	mzero(str);
+	str_p = &str[0];
+	strcpy(str, "\"Hello World\"");
+	test_ok = l_str_is_surrc(str_p, '\"');
+	
+	if (!test_ok) { return test_ok; }
+	
+	mzero(str);
+	strcpy(str, "Hello World");
+	test_ok = l_str_is_surrc(str_p, '\"') == 0 ? 1 : 0;
+	
+	return test_ok;
+}
+
+int test_l_str_rm_surrc() {
+	char str[64], *str_p;
+	mzero(str);
+	str_p = &str[0];
+	strcpy(str, "\"Hello World\"");
+	return strcmp(l_str_rm_surrc(str_p, '\"'), "Hello World") == 0 ? 1 : 0;
+}
+
 int main(int argc, char **argv) {
 	if ( sizeof(argc) || sizeof(argv) ) /* Only putting this to avoid Compiler Warning */
 	return (run_test(test_l_str_dup) &&
 			run_test(test_l_str_catx) &&
 			run_test(test_l_int_base_to_str) &&
 			run_test(test_l_str_to_int_base) &&
-			run_test(test_l_str_slice)	) ? 0 : 1;
+			run_test(test_l_str_slice) &&
+			run_test(test_l_str_is_surrc) &&
+			run_test(test_l_str_rm_surrc) ) ? 0 : 1;
 }
