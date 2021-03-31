@@ -34,7 +34,7 @@ char *l_str_catx(char *str, ...);
  *  @return Pointer the output string. If out_buff was passed, it is the same.
  */
 char *l_int_base_to_str(int num, int base, char *seq, char *out_buff);
-#define l_int_to_str(num, out_buff) l_int_base_to_str(num, NULL, 10, out_buff)
+#define l_int_to_str(num, out_buff) l_int_base_to_str(num, 10, NULL, out_buff)
 
 /** @brief Converts a string to a base integer.
  *  @param seq: Sequence, pass NULL to use the default.
