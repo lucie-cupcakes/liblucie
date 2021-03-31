@@ -1,0 +1,8 @@
+C Library for my projects.
+
+Read the file lucie_lib.h for definitions and documentation about each function.
+
+For including it in your project, you can simply copy and paste the files lucie_lib.h and lucie_lib.c,
+or run the make command for generating an object file.
+
+I recommend enabling optimizations (inline functions if possible) & linking time optimizations.
