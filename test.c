@@ -66,8 +66,22 @@ int test_l_str_to_int_base() {
 }
 
 int test_l_str_slice() {
-	/*@TODO: Implement this */
-	return 1;
+    char str[64], out[64], *slice, *out_p;
+    int found;
+    size_t slice_len;
+    mzero(out);
+    mzero(str);
+    strcpy(str, "Greetings,,From,This,Code");
+    found = 0;
+    slice = &str[0];
+    out_p = &out[0];
+    do {
+        found = l_str_slice(slice, ',', &slice_len);
+        strncat(out_p, slice, slice_len);
+        strcat(out_p, ";");
+        slice = slice + slice_len + 1;
+    } while(found);
+    return strcmp(out_p, "Greetings;;From;This;Code;") == 0 ? 1 : 0;
 }
 
 int main(int argc, char **argv) {
