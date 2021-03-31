@@ -6,3 +6,6 @@ For including it in your project, you can simply copy and paste the files lucie_
 or run the make command for generating an object file.
 
 I recommend enabling optimizations & linking time optimizations.
+
+Read file LICENSE for information on copyright & distribution
+Read file ATTRIBUTION for used/based open source code. 

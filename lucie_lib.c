@@ -1,3 +1,6 @@
+/* Go visit https://github.com/lucie-cupcakes/liblucie for the latest version */
+/* MIT License, more info read FILE LICENSE or visit https://github.com/lucie-cupcakes/liblucie/blob/main/LICENSE */
+
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>

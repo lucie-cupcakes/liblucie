@@ -1,0 +1,10 @@
+The following Code is Based of Project qemu-run <https://github.com/lucie-cupcakes/qemu-run>
+	Copyright by it original author and contributors.
+	Licensed under BSD 2: https://github.com/lucie-cupcakes/qemu-run/blob/f9a26b13c69cf5c52a2cbde68e8db313afb5be19/LICENSE#L3
+	Project contributors: https://github.com/lucie-cupcakes/qemu-run/blob/f9a26b13c69cf5c52a2cbde68e8db313afb5be19/CONTRIBUTORS#L1
+
+	Functions:
+	l_str_catx - https://github.com/lucie-cupcakes/qemu-run/blob/f9a26b13c69cf5c52a2cbde68e8db313afb5be19/qemu-run.c#L61
+	l_int_base_to_str - https://github.com/lucie-cupcakes/qemu-run/blob/f9a26b13c69cf5c52a2cbde68e8db313afb5be19/qemu-run.c#L75
+	l_strn_to_int_base - https://github.com/lucie-cupcakes/qemu-run/blob/f9a26b13c69cf5c52a2cbde68e8db313afb5be19/qemu-run.c#L94
+	l_strn_rm_surrc - https://github.com/lucie-cupcakes/qemu-run/blob/f9a26b13c69cf5c52a2cbde68e8db313afb5be19/qemu-run.c#L157
