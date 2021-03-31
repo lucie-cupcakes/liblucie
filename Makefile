@@ -6,7 +6,7 @@ CFLAGS ?= -Ofast -s -flto -mtune=generic
 #CFLAGS = -Og -g -D DEBUG -mtune=generic -fsanitize=address,leak
 
 all: lucie_lib.obj
-.PHONY: test clean
+.PHONY: clean
 
 lucie_lib.obj:
 	${CC} ${CSTD} ${CWARN} ${CFLAGS} -c lucie_lib.c -o ${OUTDIR}/lucie_lib.obj
