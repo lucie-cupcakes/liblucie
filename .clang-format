@@ -1,0 +1,13 @@
+﻿---
+AlignAfterOpenBracket: Align
+BreakBeforeBraces: Attach
+ColumnLimit: '80'
+IndentWidth: '4'
+IndentWrappedFunctionNames: 'false'
+PointerAlignment: Right
+SpacesInParentheses: 'false'
+SpacesInSquareBrackets: 'false'
+TabWidth: '4'
+UseTab: Never
+
+...
