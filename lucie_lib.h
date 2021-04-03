@@ -1,5 +1,6 @@
 /* Go visit https://github.com/lucie-cupcakes/liblucie for the latest version */
-/* MIT License, more info read FILE LICENSE or visit https://github.com/lucie-cupcakes/liblucie/blob/main/LICENSE */
+/* MIT License, more info read FILE LICENSE or visit
+ * https://github.com/lucie-cupcakes/liblucie/blob/main/LICENSE */
 
 #ifndef LUCIE_LIB_INCLUDED
 #define LUCIE_LIB_INCLUDED
@@ -44,7 +45,8 @@ char *l_int_base_to_str(int num, int base, char *seq, char *out_buff);
  *  @return Converted number.
  */
 int l_strn_to_int_base(const char *str, size_t str_len, int base, char *seq);
-#define l_str_to_int_base(str, base, seq) l_strn_to_int_base(str, strlen(str), base, seq)
+#define l_str_to_int_base(str, base, seq)                                      \
+    l_strn_to_int_base(str, strlen(str), base, seq)
 #define l_str_to_int(str) l_strn_to_int_base(str, strlen(str), 10, NULL)
 #define l_strn_to_int(str, str_len) l_strn_to_int_base(str, str_len, 10, NULL)
 
@@ -57,8 +59,10 @@ int l_strn_to_int_base(const char *str, size_t str_len, int base, char *seq);
  *  and set with the length of the slice.
  *  @return 1 if the delimiter was found, 0 if not.
  */
-int l_strn_slice(const char *str, size_t str_len, const char del, size_t *out_slice_len);
-#define l_str_slice(str, del, out_slice_len) l_strn_slice(str, strlen(str), del, out_slice_len)
+int l_strn_slice(const char *str, size_t str_len, const char del,
+                 size_t *out_slice_len);
+#define l_str_slice(str, del, out_slice_len)                                   \
+    l_strn_slice(str, strlen(str), del, out_slice_len)
 
 /** @brief Checks whenever a string is surronded by a character.
  *  Useful for detecting quoted strings.
@@ -67,7 +71,7 @@ int l_strn_slice(const char *str, size_t str_len, const char del, size_t *out_sl
  *  @param c: Character to check.
  *  @return 1 if it is surronded, 0 if not.
  */
-int l_strn_is_surrc(const char* str, size_t str_len, const char c);
+int l_strn_is_surrc(const char *str, size_t str_len, const char c);
 #define l_str_is_surrc(str, c) l_strn_is_surrc(str, strlen(str), c)
 
 /** @brief Removes a character from a string being surronded by it.
@@ -77,7 +81,7 @@ int l_strn_is_surrc(const char* str, size_t str_len, const char c);
  *  @param c: Character to check.
  *  @return Pointer to the processed string.
  */
-char* l_strn_rm_surrc(char* str, size_t str_len, const char c);
+char *l_strn_rm_surrc(char *str, size_t str_len, const char c);
 #define l_str_rm_surrc(str, c) l_strn_rm_surrc(str, strlen(str), c)
 
 #endif /* LUCIE_LIB_INCLUDED */
