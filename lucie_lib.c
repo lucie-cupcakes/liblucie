@@ -119,7 +119,7 @@ size_t l_strn_trim_right_ro(const char *str, size_t str_len) {
 
 char* l_strn_trim_right(char *str, size_t str_len) {
     for (; isspace(str[str_len]); str_len--) {
-        str[len] = 0;
+        str[str_len] = 0;
     }
     return str;
 }
