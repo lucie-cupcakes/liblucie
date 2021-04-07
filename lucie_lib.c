@@ -97,3 +97,29 @@ char *l_strn_rm_surrc(char *str, size_t str_len, const char c) {
         return str;
     }
 }
+
+size_t l_strn_trim_left_ro(const char *str, size_t str_len) {
+    size_t i = 0;
+    for (; i < str_len && isspace(str[i]); i++);
+    return i;
+}
+
+char* l_strn_trim_left(char *str, size_t str_len) {
+    size_t l_off = 0;
+    for (; l_off < str_len && isspace(str[l_off]); l_off++) {
+        str[l_off] = 0;
+    }
+    return &str[0] + l_off;
+}
+
+size_t l_strn_trim_right_ro(const char *str, size_t str_len) {
+    for (; isspace(str[str_len]); str_len--);
+    return str_len;
+}
+
+char* l_strn_trim_right(char *str, size_t str_len) {
+    for (; isspace(str[str_len]); str_len--) {
+        str[len] = 0;
+    }
+    return str;
+}

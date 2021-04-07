@@ -84,4 +84,19 @@ int l_strn_is_surrc(const char *str, size_t str_len, const char c);
 char *l_strn_rm_surrc(char *str, size_t str_len, const char c);
 #define l_str_rm_surrc(str, c) l_strn_rm_surrc(str, strlen(str), c)
 
+/*
+ * @TODO: Doxygen
+ */
+char* l_strn_trim_left(char *str, size_t str_len);
+#define l_strn_trim_left(str) l_strn_trim_left(str, strlen(str))
+
+size_t l_strn_trim_left_ro(const char *str, size_t str_len);
+#define l_str_trim_left_ro(str) l_strn_trim_left_ro(str, strlen(str))
+
+size_t l_strn_trim_right_ro(const char *str, size_t str_len);
+#define l_str_trim_right_ro(str) l_strn_trim_right_ro(str, strlen(str))
+
+char* l_strn_trim_right(char *str, size_t str_len);
+#define l_str_trim_right(str) l_strn_trim_right(str, strlen(str))
+
 #endif /* LUCIE_LIB_INCLUDED */
