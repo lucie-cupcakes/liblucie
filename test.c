@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "lucie_lib.h"
+#include "liblucie.h"
 
 #define run_test(x) run_test_f(#x, x())
 #define mkbool(x) ((x) ? 1 : 0)

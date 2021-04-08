@@ -11,7 +11,7 @@
 #include <stdio.h>
 #endif /* DEBUG */
 
-#include "lucie_lib.h"
+#include "liblucie.h"
 
 char *
 l_strn_dup(const char *str, size_t s_len)
