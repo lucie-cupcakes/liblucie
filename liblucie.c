@@ -18,7 +18,7 @@ l_strn_dup(const char *str, size_t s_len)
 {
     char *ptr;
     s_len++;
-    ptr = malloc(s_len);
+    ptr = calloc(s_len+1, 1);
     return ptr ? memcpy(ptr, str, s_len) : ptr;
 }
 
