@@ -19,7 +19,7 @@ $(OUTDIR)/test.o: $(OUTDIR) test.c
 	${CC} ${CSTD} ${CFLAGS} -o $@ -c test.c
 
 $(OUTDIR)/test: $(OUTDIR) $(OUTDIR)/liblucie.o $(OUTDIR)/test.o
-	${CC} ${CSTD} ${CFLAGS} -o $@ $(OUTDIR)/liblucie.o $(CWD)/test.o
+	${CC} ${CSTD} ${CFLAGS} -o $@ $(OUTDIR)/liblucie.o $(OUTDIR)/test.o
 
 format:
 	clang-format -i *.h
