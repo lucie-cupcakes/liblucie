@@ -99,4 +99,9 @@ size_t l_strn_trim_right_ro(const char *str, size_t str_len);
 char* l_strn_trim_right(char *str, size_t str_len);
 #define l_str_trim_right(str) l_strn_trim_right(str, strlen(str))
 
+int l_strn_starts_with(const char *haystack, const char *needle,
+                        size_t haystack_len, size_t needle_len);
+#define l_str_starts_with(haystack, needle) \
+        l_strn_starts_with(haystack, needle, strlen(haystack), strlen(needle))
+
 #endif /* LUCIE_LIB_INCLUDED */

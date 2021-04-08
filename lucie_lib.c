@@ -5,6 +5,11 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+
+#ifdef DEBUG
+#include <stdio.h>
+#endif /* DEBUG */
 
 #include "lucie_lib.h"
 
@@ -122,4 +127,15 @@ char* l_strn_trim_right(char *str, size_t str_len) {
         str[str_len] = 0;
     }
     return str;
+}
+
+int l_strn_starts_with(const char *haystack, const char *needle,
+                        size_t haystack_len, size_t needle_len) {
+    int rc;
+    size_t i = 1;
+    rc = (haystack[0] && needle[0] && haystack[0] == needle[0]);
+    for (; rc && i < haystack_len && i < needle_len; i++) {
+        rc = (haystack[i] == needle[i]);
+    }
+    return rc;
 }
