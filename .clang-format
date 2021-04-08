@@ -1,12 +1,14 @@
 ﻿---
 AlignAfterOpenBracket: Align
-BreakBeforeBraces: Attach
+AllowShortBlocksOnASingleLine: 'true'
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortLoopsOnASingleLine: 'true'
+AlwaysBreakAfterReturnType: All
+BreakBeforeBraces: Allman
 ColumnLimit: '80'
 IndentWidth: '4'
 IndentWrappedFunctionNames: 'false'
 PointerAlignment: Right
-SpacesInParentheses: 'false'
-SpacesInSquareBrackets: 'false'
 TabWidth: '4'
 UseTab: Never
 
