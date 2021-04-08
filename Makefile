@@ -1,5 +1,5 @@
 CC ?= gcc
-CWD = $(shell pwd)
+#CWD = $(shell pwd)
 OUTDIR ?= bin
 CSTD ?= -std=c89 -pedantic 
 CWARN ?= -Wall -Wextra -Werror
@@ -12,8 +12,8 @@ all: $(OUTDIR)/liblucie.o
 $(OUTDIR):
 	test -p $(OUTDIR) || mkdir -p $(OUTDIR)
 
-$(OUTDIR)/liblucie.o: $(OUTDIR) lucie_lib.c
-	${CC} ${CSTD} ${CWARN} ${CFLAGS} -o $@ -c $(CWD)/lucie_lib.c
+$(OUTDIR)/liblucie.o: $(OUTDIR) liblucie.c
+	${CC} ${CSTD} ${CWARN} ${CFLAGS} -o $@ -c liblucie.c
 
 $(OUTDIR)/test.o: $(OUTDIR) test.c
 	${CC} ${CSTD} ${CFLAGS} -o $@ -c test.c
