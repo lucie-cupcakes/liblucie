@@ -9,12 +9,16 @@
 #define mkbool(x) ((x) ? 1 : 0)
 #define mzero(x) memset(x, 0, sizeof(x))
 
-int run_test_f(const char *name, int result) {
+int
+run_test_f(const char *name, int result)
+{
     printf("TEST %s = %s\n", name, result ? "OK" : "FAIL");
     return result;
 }
 
-int test_l_str_dup() {
+int
+test_l_str_dup()
+{
     int test_ok;
     const char *s;
     char *ret;
@@ -25,7 +29,9 @@ int test_l_str_dup() {
     return test_ok;
 }
 
-int test_l_str_catx() {
+int
+test_l_str_catx()
+{
     char buff[64], *buff_p, *ret;
     const char *expected;
     int test_ok = 0;
@@ -37,9 +43,7 @@ int test_l_str_catx() {
     /* Function must return a pointer to str, and also have the string concated
      * as excepted. */
     test_ok = mkbool(ret == buff_p && strcmp(buff_p, expected) == 0);
-    if (!test_ok) {
-        return test_ok;
-    }
+    if (!test_ok) { return test_ok; }
     memset(buff, 0, sizeof(buff));
     strcpy(buff, "Lorem ipsum ");
     ret = l_str_catx(buff_p, "dolor ", "sit ", "amet.", NULL);
@@ -47,7 +51,9 @@ int test_l_str_catx() {
     return test_ok;
 }
 
-int test_l_int_base_to_str() {
+int
+test_l_int_base_to_str()
+{
     char buff[64], *buff_p, *ret;
     const char *expected;
     int num, test_ok;
@@ -57,9 +63,7 @@ int test_l_int_base_to_str() {
     buff_p = buff;
     ret = l_int_base_to_str(num, 10, NULL, buff_p);
     test_ok = mkbool(ret == buff_p && strcmp(buff_p, expected) == 0);
-    if (!test_ok) {
-        return test_ok;
-    }
+    if (!test_ok) { return test_ok; }
     mzero(buff);
     ret = l_int_base_to_str(num, 10, NULL, NULL);
     test_ok = (strcmp(ret, expected) == 0);
@@ -67,11 +71,15 @@ int test_l_int_base_to_str() {
     return test_ok;
 }
 
-int test_l_str_to_int_base() {
+int
+test_l_str_to_int_base()
+{
     return mkbool(l_str_to_int_base("142554060", 10, NULL) == 142554060);
 }
 
-int test_l_str_slice() {
+int
+test_l_str_slice()
+{
     char str[64], out[64], *slice, *out_p;
     int found;
     size_t slice_len;
@@ -90,7 +98,9 @@ int test_l_str_slice() {
     return strcmp(out_p, "Greetings;;From;This;Code;") == 0 ? 1 : 0;
 }
 
-int test_l_str_is_surrc() {
+int
+test_l_str_is_surrc()
+{
     int test_ok = 0;
     char str[64], *str_p;
     mzero(str);
@@ -98,9 +108,7 @@ int test_l_str_is_surrc() {
     strcpy(str, "\"Hello World\"");
     test_ok = l_str_is_surrc(str_p, '\"');
 
-    if (!test_ok) {
-        return test_ok;
-    }
+    if (!test_ok) { return test_ok; }
 
     mzero(str);
     strcpy(str, "Hello World");
@@ -109,7 +117,9 @@ int test_l_str_is_surrc() {
     return test_ok;
 }
 
-int test_l_str_rm_surrc() {
+int
+test_l_str_rm_surrc()
+{
     char str[64], *str_p;
     mzero(str);
     str_p = &str[0];
@@ -117,7 +127,9 @@ int test_l_str_rm_surrc() {
     return strcmp(l_str_rm_surrc(str_p, '\"'), "Hello World") == 0 ? 1 : 0;
 }
 
-int main(int argc, char **argv) {
+int
+main(int argc, char **argv)
+{
     if (sizeof(argc) ||
         sizeof(argv)) /* Only putting this to avoid Compiler Warning */
         return (run_test(test_l_str_dup) && run_test(test_l_str_catx) &&
