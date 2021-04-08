@@ -11,9 +11,9 @@ git add liblucie
 git commit -m "Added liblucie"
 
 You can use make -C liblucie, inside your Makefile to compile the library.
-Be sure to pass the env. vars OUTDIR, CFLAGS, etc so you can get your excepted results.
+Be sure to pass your variables to have the excepted results.
 
-Read the Makefile for more information.
+Alternatively you can just compile from the liblucie folder.
 
 I recommend enabling optimizations & linking time optimizations.
 
