@@ -22,8 +22,8 @@ $(OUTDIR)/test: $(OUTDIR) $(OBJECTS)
 
 #This is a hack - @TODO: Fix
 unit_test:
-	make
-	make test
+	make all
+	make $(OUTDIR)/test
 	./test 
 
 format:
