@@ -171,8 +171,8 @@ l_strn_starts_with(const char *haystack, const char *needle,
 size_t
 l_strn_char_cnt(const char *str, size_t str_len, const char c)
 {
-    size_t res = 0;
-    for (size_t i = 0; i < str_len; i++)
+    size_t res = 0, i = 0;
+    for (; i < str_len; i++)
     {
         if (str[i] == c) { res++; }
     }
