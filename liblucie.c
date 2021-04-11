@@ -167,3 +167,13 @@ l_strn_starts_with(const char *haystack, const char *needle,
     }
     return rc;
 }
+
+size_t
+l_strn_char_cnt(const char *str, size_t str_len, const char c)
+{
+    size_t res = 0;
+    for (size_t i = 0; i < str_len; i++) {
+        if (str[i] == c) { res++; }
+    }
+    return res;
+}

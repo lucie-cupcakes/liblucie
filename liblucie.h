@@ -116,4 +116,9 @@ l_strn_starts_with(const char *haystack, const char *needle,
 #define l_str_starts_with(haystack, needle)                                    \
     l_strn_starts_with(haystack, needle, strlen(haystack), strlen(needle))
 
+size_t
+l_strn_char_cnt(const char *str, size_t str_len, const char c);
+
+#define l_str_char_cnt(str, c) l_strn_char_cnt(str, strlen(str_len), c)
+
 #endif /* LUCIE_LIB_INCLUDED */
