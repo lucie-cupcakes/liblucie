@@ -18,7 +18,7 @@ l_strn_dup(const char *str, size_t s_len)
 {
     char *ptr;
     s_len++;
-    ptr = calloc(s_len+1, 1);
+    ptr = calloc(s_len + 1, 1);
     return ptr ? memcpy(ptr, str, s_len) : ptr;
 }
 
@@ -172,7 +172,8 @@ size_t
 l_strn_char_cnt(const char *str, size_t str_len, const char c)
 {
     size_t res = 0;
-    for (size_t i = 0; i < str_len; i++) {
+    for (size_t i = 0; i < str_len; i++)
+    {
         if (str[i] == c) { res++; }
     }
     return res;
