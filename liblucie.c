@@ -204,6 +204,8 @@ size_t
 l_strn_char_cnt(const char *str, size_t str_len, const char c)
 {
     size_t res = 0, i = 0;
+    assert(str);
+    assert(str_len > 0);
     for (; i < str_len; i++)
     {
         if (str[i] == c) { res++; }
