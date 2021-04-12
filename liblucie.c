@@ -6,17 +6,15 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
-
-#ifdef DEBUG
 #include <stdio.h>
-#endif /* DEBUG */
-
+#include <assert.h>
 #include "liblucie.h"
 
 char *
 l_strn_dup(const char *str, size_t s_len)
 {
     char *ptr;
+    assert(str);
     s_len++;
     ptr = calloc(s_len + 1, 1);
     return ptr ? memcpy(ptr, str, s_len) : ptr;
@@ -28,6 +26,7 @@ l_str_catx(char *str, ...)
     va_list ap;
     int dl, sl;
     char *arg;
+    assert(str);
     for (dl = 0; str[dl]; dl++)
         ;
     va_start(ap, str);
@@ -70,6 +69,8 @@ l_strn_to_int_base(const char *str, size_t str_len, int base, char *seq)
     int num, i;
     size_t str_i;
     char *val;
+    assert(str);
+    assert(str_len > 0);
     val = (seq == NULL) ? "0123456789ABCDEF" : seq;
     num = 0;
     for (str_i = 0; str_i < str_len; str_i++)
@@ -92,6 +93,9 @@ l_strn_slice(const char *str, size_t str_len, const char del,
 {
     int found;
     size_t off;
+    assert(str);
+    assert(str_len > 0);
+    assert(out_slice_len);
     found = 0;
     for (off = 0; off < str_len && !found; off++)
     {
@@ -104,12 +108,16 @@ l_strn_slice(const char *str, size_t str_len, const char del,
 int
 l_strn_is_surrc(const char *str, size_t str_len, const char c)
 {
+    assert(str);
+    assert(str_len > 0);
     return (str[str_len - 1] == c && str[0] == c) ? 1 : 0;
 }
 
 char *
 l_strn_rm_surrc(char *str, size_t str_len, const char c)
 {
+    assert(str);
+    assert(str_len);
     if (str[str_len - 1] == c && str[0] == c)
     {
         str[0] = 0;
@@ -126,6 +134,8 @@ size_t
 l_strn_trim_left_ro(const char *str, size_t str_len)
 {
     size_t i = 0;
+    assert(str);
+    assert(str_len > 0);
     for (; i < str_len && isspace(str[i]); i++)
         ;
     return i;
@@ -135,6 +145,8 @@ char *
 l_strn_trim_left(char *str, size_t str_len)
 {
     size_t l_off = 0;
+    assert(str);
+    assert(str_len > 0);
     for (; l_off < str_len && isspace(str[l_off]); l_off++) { str[l_off] = 0; }
     return &str[0] + l_off;
 }
@@ -142,15 +154,35 @@ l_strn_trim_left(char *str, size_t str_len)
 size_t
 l_strn_trim_right_ro(const char *str, size_t str_len)
 {
-    for (; isspace(str[str_len]); str_len--)
-        ;
+    size_t i;
+    assert(str);
+    assert(str_len > 0);
+    for (i = str_len - 1; i >= str_len - 1; i--)
+    {
+        if (isspace(str[i])) {
+            str_len--;
+        } else {
+            break;
+        }
+    }
     return str_len;
 }
 
 char *
 l_strn_trim_right(char *str, size_t str_len)
 {
-    for (; isspace(str[str_len]); str_len--) { str[str_len] = 0; }
+    size_t i;
+    assert(str);
+    assert(str_len > 0);
+    for (i = str_len - 1; i >= str_len - 1; i--)
+    {
+        if (isspace(str[i])) {
+            str[i] = 0;
+            str_len--;
+        } else {
+            break;
+        }
+    }
     return str;
 }
 
