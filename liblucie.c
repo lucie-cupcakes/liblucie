@@ -191,9 +191,15 @@ l_strn_starts_with(const char *haystack, const char *needle,
                    size_t haystack_len, size_t needle_len)
 {
     int rc;
-    size_t i = 1;
+    size_t i;
+    
+    assert(haystack);
+    assert(needle);
+    assert(haystack_len);
+    assert(needle_len);
+
     rc = (haystack[0] && needle[0] && haystack[0] == needle[0]);
-    for (; rc && i < haystack_len && i < needle_len; i++)
+    for (i = 1; rc && i < haystack_len && i < needle_len; i++)
     {
         rc = (haystack[i] == needle[i]);
     }
