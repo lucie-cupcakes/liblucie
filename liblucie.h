@@ -91,34 +91,65 @@ char *
 l_strn_rm_surrc(char *str, size_t str_len, const char c);
 #define l_str_rm_surrc(str, c) l_strn_rm_surrc(str, strlen(str), c)
 
-/*
- * @TODO: Doxygen
+/** @brief Removes leading whitespace from a string.
+ *  @param str: Input string.
+ *  @param str_len The length of the string.
+ *  @return Pointer to the processed string.
  */
 char *
 l_strn_trim_left(char *str, size_t str_len);
 #define l_str_trim_left(str) l_strn_trim_left(str, strlen(str))
 
+/** @brief Removes leading whitespace from a string.
+/** Does not modify the input.
+ *  @param str: Input string.
+ *  @param str_len The length of the string.
+ *  @return Left offset from where there are no spaces.
+ */
 size_t
 l_strn_trim_left_ro(const char *str, size_t str_len);
 #define l_str_trim_left_ro(str) l_strn_trim_left_ro(str, strlen(str))
 
-size_t
-l_strn_trim_right_ro(const char *str, size_t str_len);
-#define l_str_trim_right_ro(str) l_strn_trim_right_ro(str, strlen(str))
-
+/** @brief Removes whitespace from the right side of a string.
+ *  @param str: Input string.
+ *  @param str_len The length of the string.
+ *  @return Pointer to the processed string.
+ */
 char *
 l_strn_trim_right(char *str, size_t str_len);
 #define l_str_trim_right(str) l_strn_trim_right(str, strlen(str))
 
+/** @brief Removes whitespace from the right side of a string.
+/** Does not modify the input.
+ *  @param str: Input string.
+ *  @param str_len The length of the string.
+ *  @return The new string length
+ */
+size_t
+l_strn_trim_right_ro(const char *str, size_t str_len);
+#define l_str_trim_right_ro(str) l_strn_trim_right_ro(str, strlen(str))
+
+/** @brief Checks if a string starts with another.
+ *  @param haystack: Input string.
+ *  @param needle: The string to find.
+ *  @param haystack_len: Length of the input string.
+ *  @param needle_len: Length of the string to find.
+ *  @return 1 if "haystack" starts with "needle", 0 if not.
+ */
 int
 l_strn_starts_with(const char *haystack, const char *needle,
                    size_t haystack_len, size_t needle_len);
 #define l_str_starts_with(haystack, needle)                                    \
     l_strn_starts_with(haystack, needle, strlen(haystack), strlen(needle))
 
+/** @brief Counts how many time a character is inside a string
+ *  @param str: Input string.
+ *  @param str_len The length of the string.
+ *  @param c: The character to find.
+ *  @return The count of occurrences.
+ */
 size_t
 l_strn_char_cnt(const char *str, size_t str_len, const char c);
-
 #define l_str_char_cnt(str, c) l_strn_char_cnt(str, strlen(str_len), c)
 
 #endif /* LUCIE_LIB_INCLUDED */

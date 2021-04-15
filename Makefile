@@ -1,7 +1,7 @@
 CC ?= gcc
 #CWD = $(shell pwd)
 OUTDIR ?= bin
-CSTD ?= -std=c89 -pedantic 
+CSTD ?= -std=c99 -pedantic 
 CWARN ?= -Wall -Wextra -Werror
 CFLAGS ?= -Ofast -s -flto -mtune=generic 
 #CFLAGS = -Og -g -D DEBUG -mtune=generic -fsanitize=address,leak

@@ -19,12 +19,9 @@ run_test_f(const char *name, int result)
 int
 test_l_str_dup()
 {
-    int test_ok;
-    const char *s;
-    char *ret;
-    s = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-    ret = l_str_dup(s);
-    test_ok = (strcmp(ret, s) == 0);
+    const char *s = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+    char *ret = l_str_dup(s);
+    int test_ok = (strcmp(ret, s) == 0);
     free(ret);
     return test_ok;
 }
@@ -101,12 +98,11 @@ test_l_str_slice()
 int
 test_l_str_is_surrc()
 {
-    int test_ok = 0;
     char str[64], *str_p;
     mzero(str);
     str_p = &str[0];
     strcpy(str, "\"Hello World\"");
-    test_ok = l_str_is_surrc(str_p, '\"');
+    int test_ok = l_str_is_surrc(str_p, '\"');
 
     if (!test_ok) { return test_ok; }
 
@@ -120,9 +116,9 @@ test_l_str_is_surrc()
 int
 test_l_str_rm_surrc()
 {
-    char str[64], *str_p;
+    char str[64];
     mzero(str);
-    str_p = &str[0];
+    char *str_p = &str[0];
     strcpy(str, "\"Hello World\"");
     return strcmp(l_str_rm_surrc(str_p, '\"'), "Hello World") == 0 ? 1 : 0;
 }

@@ -1,14 +1,16 @@
 C Library for my projects.
 
+Requires C99 standard.
+
 Read the file liblucie.h for definitions and documentation about each function.
 
 For using it in your project, I recommend you use git submodules:
 
 cd my_project
 git init
-git submodule add https://github.com/lucie-cupcakes/liblucie
-git add liblucie
-git commit -m "Added liblucie"
+git submodule add https://github.com/lucie-cupcakes/liblucie vendor/liblucie
+git add vendor/liblucie
+git commit -m "Added vendor liblucie"
 
 You can use make -C liblucie, inside your Makefile to compile the library.
 Be sure to pass your variables to have the excepted results.
