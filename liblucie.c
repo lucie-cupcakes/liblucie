@@ -2,13 +2,13 @@
 /* MIT License, more info read FILE LICENSE or visit
  * https://github.com/lucie-cupcakes/liblucie/blob/main/LICENSE */
 
+#include "liblucie.h"
+#include <assert.h>
 #include <ctype.h>
 #include <stdarg.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
-#include <assert.h>
-#include "liblucie.h"
 
 char *
 l_strn_dup(const char *str, size_t s_len)
@@ -25,9 +25,10 @@ l_str_catx(char *str, ...)
     assert(str);
     va_list ap;
     int dl = 0;
-    for (dl = 0; str[dl]; dl++);
+    for (dl = 0; str[dl]; dl++)
+        ;
     va_start(ap, str);
-    while ((char * arg = va_arg(ap, char *)))
+    while ((char *arg = va_arg(ap, char *)))
     {
         for (int sl = 0; arg[sl]; sl++) { str[dl++] = arg[sl]; }
     }
@@ -66,7 +67,8 @@ l_strn_to_int_base(const char *str, size_t str_len, int base, char *seq)
     for (size_t i = 0; i < str_len; i++)
     {
         int j = 0;
-        for (; j < base && str[i] != val[j]; j++);
+        for (; j < base && str[i] != val[j]; j++)
+            ;
         if (j == base)
         {
             rc = 0;
@@ -135,10 +137,13 @@ l_strn_trim_right(char *str, size_t str_len)
     assert(str_len);
     for (size_t i = str_len - 1; i >= str_len - 1; i--)
     {
-        if (isspace(str[i])) {
+        if (isspace(str[i]))
+        {
             str[i] = 0;
             str_len--;
-        } else {
+        }
+        else
+        {
             break;
         }
     }
@@ -151,10 +156,10 @@ l_strn_trim_left_ro(const char *str, size_t str_len)
     assert(str);
     assert(str_len);
     size_t i = 0;
-    for (; i < str_len && isspace(str[i]); i++);
+    for (; i < str_len && isspace(str[i]); i++)
+        ;
     return i;
 }
-
 
 size_t
 l_strn_trim_right_ro(const char *str, size_t str_len)
@@ -163,15 +168,14 @@ l_strn_trim_right_ro(const char *str, size_t str_len)
     assert(str_len);
     for (size_t i = str_len - 1; i >= str_len - 1; i--)
     {
-        if (isspace(str[i])) {
-            str_len--;
-        } else {
+        if (isspace(str[i])) { str_len--; }
+        else
+        {
             break;
         }
     }
     return str_len;
 }
-
 
 int
 l_strn_starts_with(const char *haystack, const char *needle,
