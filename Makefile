@@ -2,11 +2,15 @@ CC ?= gcc
 #CWD = $(shell pwd)
 OUTDIR ?= bin
 CSTD ?= -std=c99 -pedantic 
-CWARN ?= -Wall -Wextra -Werror
-CFLAGS ?= -Ofast -s -flto -mtune=generic 
-#CFLAGS = -Og -g -D DEBUG -mtune=generic -fsanitize=address,leak
+CWARN ?= -Wall -Wextra
 SOURCES := $(wildcard *.c)
 OBJECTS := $(patsubst %.c,$(OUTDIR)/%.o,$(SOURCES))
+
+ifdef DEBUG
+override CFLAGS ?= -D DEBUG -g -Og -mtune=generic -fsanitize=address,undefined
+else
+override CFLAGS ?= -D NDEBUG -s -Ofast -flto -mtune=native
+endif
 
 all: $(OUTDIR) $(OUTDIR)/liblucie.o
 .PHONY: clean format unit_test
@@ -24,7 +28,7 @@ $(OUTDIR)/test: $(OUTDIR) $(OBJECTS)
 unit_test:
 	make all
 	make $(OUTDIR)/test
-	./test 
+	$(OUTDIR)/test 
 
 format:
 	clang-format -i *.h

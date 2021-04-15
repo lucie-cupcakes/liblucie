@@ -1,6 +1,7 @@
-/* Go visit https://github.com/lucie-cupcakes/liblucie for the latest version */
-/* MIT License, more info read FILE LICENSE or visit
- * https://github.com/lucie-cupcakes/liblucie/blob/main/LICENSE */
+/* Go visit https://github.com/lucie-cupcakes/liblucie for the latest version
+ * MIT License, more info read FILE LICENSE or visit
+ * https://github.com/lucie-cupcakes/liblucie/blob/main/LICENSE
+ */
 
 #include "liblucie.h"
 #include <assert.h>
@@ -23,14 +24,15 @@ char *
 l_str_catx(char *str, ...)
 {
     assert(str);
+    char *arg;
     va_list ap;
-    int dl = 0;
+    size_t dl = 0;
     for (dl = 0; str[dl]; dl++)
         ;
     va_start(ap, str);
-    while ((char *arg = va_arg(ap, char *)))
+    while ((arg = va_arg(ap, char *)))
     {
-        for (int sl = 0; arg[sl]; sl++) { str[dl++] = arg[sl]; }
+        for (size_t sl = 0; arg[sl]; sl++) { str[dl++] = arg[sl]; }
     }
     va_end(ap);
     str[dl] = 0;
