@@ -14,55 +14,51 @@
 
 typedef int32_t l_strlen_t
 
-/* strings.c */
+typedef struct
+{
+    l_strlen_t length;
+    char *value;
+} l_string;
 
-//#if defined(_USE_TOOLBOX) || defined(_BUILDLIB)
 EXTERN int
-tb_strlen(char *str);
+tb_strlen(char *c_str);
 EXTERN void *
 tb_memcpy(void *dst, void *src, size_t size);
 EXTERN void *
 tb_memset(void *dst, int chr, size_t size);
 EXTERN int
 tb_memcmp(void *str1, void *str2, size_t size);
-//#else
-//#include <string.h>
-//#define tb_strlen(str) strlen(str)
-////#define tb_memcpy(dst, src, size) memcpy(dst, src, size)
-//#define tb_memset(dst, chr, size) memset(dst, chr, size)
-//#define tb_memcmp(str1, str2, size) memcmp(str1, str2, size)
-//#endif
+
 EXTERN char *
 tb_strndup(char *srcstr, int len);
+
 EXTERN char *
-tb_strdup(char *srcstr);
+tb_strltrim(l_string *str);
 EXTERN char *
-tb_strltrim(char *str);
+tb_strrtrim(l_string *str);
 EXTERN char *
-tb_strrtrim(char *str);
+tb_strlrtrim(l_string *str);
 EXTERN char *
-tb_strlrtrim(char *str);
+tb_strsub(l_string *str, int idx, int len);
 EXTERN char *
-tb_strsub(char *str, int idx, int len);
+tb_strinsert(l_string *str, char *insert, int idx);
 EXTERN char *
-tb_strinsert(char *str, char *insert, int idx);
-EXTERN char *
-tb_strfind(char *str, char *findstr);
+tb_strfind(l_string *str, char *findstr);
 EXTERN void
 tb_strsplit(char **str, char **splt, int idx);
 EXTERN void
 tb_strreplace(char **str, char *findstr, char *replace);
 EXTERN int
-tb_strcmp(char *str1, char *str2);
+tb_strcmp(l_string *str1, l_string *str2);
 EXTERN int
-tb_stricmp(char *str1, char *str2);
+tb_stricmp(l_string *str1, l_string *str2);
 EXTERN char *
-tb_strcatx(char *str, int num, ...);
+tb_strcatx(l_string *str, int num, ...);
 EXTERN char *
-tb_strcatdx(char *str, char delim, int num, ...);
+tb_strcatdx(l_string *str, char delim, int num, ...);
 EXTERN char *
-tb_strcatax(char *str, int num, char **strarr);
+tb_strcatax(l_string *str, int num, char **strarr);
 EXTERN char *
-tb_strcatdax(char *str, char delim, int num, char **strarr);
+tb_strcatdax(l_string *str, char delim, int num, char **strarr);
 #undef EXTERN
 #endif // L_STRING_H_INCLUDED
