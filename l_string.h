@@ -1,8 +1,8 @@
 // Copyright (c) 2021 Lucie Cupcakes <lucie_linux@protonmail.com>
 // Licensed under BSD-3-Clause - https://spdx.org/licenses/BSD-3-Clause
 
-#ifndef _TBSTRINGS_H
-#define _TBSTRINGS_H
+#ifndef L_STRING_H_INCLUDED
+#define L_STRING_H_INCLUDED
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -11,6 +11,8 @@
 #else
 #define EXTERN
 #endif
+
+typedef int32_t l_strlen_t
 
 /* strings.c */
 
@@ -63,4 +65,4 @@ tb_strcatax(char *str, int num, char **strarr);
 EXTERN char *
 tb_strcatdax(char *str, char delim, int num, char **strarr);
 #undef EXTERN
-#endif
+#endif // L_STRING_H_INCLUDED
