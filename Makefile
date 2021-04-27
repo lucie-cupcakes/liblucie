@@ -1,4 +1,5 @@
 CC ?= gcc
+AR ?= ar
 OUTDIR ?= bin
 CSTD ?= -std=c99 -pedantic 
 CWARN ?= -Wall -Wextra
@@ -11,23 +12,29 @@ else
 override CFLAGS ?= -D NDEBUG -s -Ofast -flto -mtune=native
 endif
 
-all: $(OUTDIR) $(OUTDIR)/liblucie.o
+all: $(OUTDIR) $(OUTDIR)/libl_string.a $(OUTDIR)/libl_string.so
 .PHONY: clean format unit_test
 
 $(OUTDIR):
 	test -p $(OUTDIR) || mkdir -p $(OUTDIR)
 
 $(OUTDIR)/%.o: %.c
-	${CC} ${CSTD} ${CWARN} ${CFLAGS} -c -o $@ $<
+	${CC} ${CSTD} ${CWARN} ${CFLAGS} -fPIC -c -o $@ $<
 
-$(OUTDIR)/test: $(OUTDIR) $(OBJECTS)
-	${CC} ${CSTD} ${CFLAGS} -o $@ $(OBJECTS) 
+$(OUTDIR)/libl_string.a: $(OUTDIR) $(OBJECTS)
+	${AR} rcs $@ $(OBJECTS)
+
+$(OUTDIR)/libl_string.so: $(OUTDIR) $(OBJECTS)
+	${CC} -shared -o $@ $(OBJECTS)
+
+#$(OUTDIR)/test: $(OUTDIR) $(OBJECTS)
+#	${CC} ${CSTD} ${CFLAGS} -o $@ $(OBJECTS) 
 
 #This is a hack - @TODO: Fix
-unit_test:
-	make all
-	make $(OUTDIR)/test
-	$(OUTDIR)/test 
+#unit_test:
+#	make all
+#	make $(OUTDIR)/test
+#	$(OUTDIR)/test 
 
 format:
 	clang-format -i *.h
