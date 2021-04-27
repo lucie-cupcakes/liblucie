@@ -22,7 +22,7 @@
 
 /* strings.c */
 
-#if defined(_USE_TOOLBOX) || defined(_BUILDLIB)
+//#if defined(_USE_TOOLBOX) || defined(_BUILDLIB)
 EXTERN int
 tb_strlen(char *str);
 EXTERN void *
@@ -31,13 +31,13 @@ EXTERN void *
 tb_memset(void *dst, int chr, size_t size);
 EXTERN int
 tb_memcmp(void *str1, void *str2, size_t size);
-#else
-#include <string.h>
-#define tb_strlen(str) strlen(str)
-#define tb_memcpy(dst, src, size) memcpy(dst, src, size)
-#define tb_memset(dst, chr, size) memset(dst, chr, size)
-#define tb_memcmp(str1, str2, size) memcmp(str1, str2, size)
-#endif
+//#else
+//#include <string.h>
+//#define tb_strlen(str) strlen(str)
+////#define tb_memcpy(dst, src, size) memcpy(dst, src, size)
+//#define tb_memset(dst, chr, size) memset(dst, chr, size)
+//#define tb_memcmp(str1, str2, size) memcmp(str1, str2, size)
+//#endif
 EXTERN char *
 tb_strndup(char *srcstr, int len);
 EXTERN char *
