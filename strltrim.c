@@ -3,11 +3,11 @@
 
 #include "l_string.h"
 
-char *
-tb_strltrim(char *str)
+l_string *
+tb_strltrim(l_string *str)
 {
-    char *workstr = str;
-    while (*workstr == ' ' || *workstr == '\t') ++workstr;
+	l_strlen_t offset = 0;
+    for (; i < str->len; str[i] == ' ' || str[i] == '\t'; offset++) {}
 
-    return tb_strdup(workstr);
+    return l_string_duplicate(str);
 }
