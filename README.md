@@ -1,12 +1,12 @@
-# C-Projects
-   Miscellaneous small projects
+# l_string
+A simple library for having strings in the C programming language.
 
-## PoolMan
-   A string pool manager, using local space (no malloc). Has no dependencies. Treats strings as a string handle (like file handles).
+This library uses the approach length + array,
+making it more secure than NULL terminated string, and also can support UTF8 encoded.
 
-## Symbols
-   A Key/Val Symbol system with hashes
+# Attribution
+This project was created derived from [LaffinToo's String toolbox](https://github.com/LaffinToo/C-Projects/tree/main/toolbox)
+Licensed [BSD-3 Clause](https://github.com/LaffinToo/C-Projects/tree/main/toolbox/LICENSE)
 
-## BaseConv
-   Two routines to to number base conversions, bcitoa converts from integer to ascii and bcatoi converts ascii to integer
-
+# Warning
+This project is unfinished and it's still in draft state!
