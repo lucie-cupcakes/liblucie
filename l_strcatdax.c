@@ -4,7 +4,7 @@
 #include "l_string.h"
 
 char *
-tb_strcatax(char *str, int num, char **strarr)
+l_strcatdax(char *str, char delim, int num, char **strarr)
 {
     int dl, sl, tl, idx;
 
@@ -12,6 +12,7 @@ tb_strcatax(char *str, int num, char **strarr)
     for (idx = 0; idx < num; idx++)
     {
         tl = dl = tb_strlen(strarr[idx]);
+        str[sl++] = delim;
         str = realloc(str, sl + dl);
         while (dl-- > 0) str[sl + dl] = strarr[idx][dl];
         sl += tl;

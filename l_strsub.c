@@ -4,7 +4,7 @@
 #include "l_string.h"
 
 char *
-tb_strsub(char *str, int idx, int len)
+l_strsub(char *str, int idx, int len)
 {
     char *newstr = NULL;
     int slen = tb_strlen(str);

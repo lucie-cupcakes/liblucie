@@ -4,7 +4,9 @@
 #include "l_string.h"
 
 char *
-tb_strlrtrim(char *str)
+l_strrtrim(char *str)
 {
-    return tb_strrtrim(tb_strltrim(str));
+    int len = tb_strlen(str);
+    while (str[len - 1] == ' ' || str[len - 1] == '\t') --len;
+    return tb_strndup(str, len);
 }

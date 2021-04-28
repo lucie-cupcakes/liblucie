@@ -4,7 +4,7 @@
 #include "l_string.h"
 
 char *
-tb_strinsert(char *str, char *insert, int idx)
+l_strinsert(char *str, char *insert, int idx)
 {
     char *newstr;
     int slen = tb_strlen(str), ilen = tb_strlen(insert);

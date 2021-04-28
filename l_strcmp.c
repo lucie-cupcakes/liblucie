@@ -4,13 +4,10 @@
 #include "l_string.h"
 
 int
-tb_stricmp(char *str1, char *str2)
+l_strcmp(char *str1, char *str2)
 {
-    char c;
     int res;
-    while (*str1 && *str2 &&
-           !(res = (((unsigned)(c = *str1 & '_') - 'A') < 26 ? c : *str1) -
-                   (((unsigned)(c = *str2 & '_') - 'A') < 26 ? c : *str2)))
+    while (*str1 && *str2 && !(res = *str1 - *str2))
     {
         str1++;
         str2++;

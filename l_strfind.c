@@ -4,7 +4,7 @@
 #include "l_string.h"
 
 char *
-tb_strfind(char *str, char *findstr)
+l_strfind(char *str, char *findstr)
 {
     int spos = 0, fpos = 0, opos;
 

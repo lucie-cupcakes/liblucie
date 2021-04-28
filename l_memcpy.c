@@ -4,7 +4,7 @@
 #include "l_string.h"
 
 void *
-tb_memcpy(void *dst, void *src, size_t size)
+l_memcpy(void *dst, void *src, size_t size)
 {
 
 #ifdef _USE_64BIT

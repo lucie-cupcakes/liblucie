@@ -4,10 +4,9 @@
 #include "l_string.h"
 
 char *
-tb_strdup(char *srcstr)
+l_strndup(char *srcstr, int len)
 {
     char *newstr;
-    int len = tb_strlen(srcstr);
     if ((newstr = (char *)malloc(len + 1)))
     {
         tb_memcpy(newstr, srcstr, len);

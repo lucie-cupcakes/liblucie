@@ -4,7 +4,7 @@
 #include "l_string.h"
 
 l_string *
-tb_strltrim(l_string *str)
+l_strltrim(l_string *str)
 {
 	l_strlen_t offset = 0;
     for (; i < str->len; str[i] == ' ' || str[i] == '\t'; offset++) {}

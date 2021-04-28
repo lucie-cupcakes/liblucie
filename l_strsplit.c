@@ -4,7 +4,7 @@
 #include "l_string.h"
 
 void
-tb_strsplit(char **str, char **split, int idx)
+l_strsplit(char **str, char **split, int idx)
 {
     char *newstr;
 

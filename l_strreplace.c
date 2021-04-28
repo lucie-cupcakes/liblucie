@@ -4,7 +4,7 @@
 #include "l_string.h"
 
 void
-tb_strreplace(char **str, char *findstr, char *replace)
+l_strreplace(char **str, char *findstr, char *replace)
 {
     char *newstr, *fs;
     int idx = 0, slen = tb_strlen(*str), flen = tb_strlen(findstr),

@@ -4,7 +4,7 @@
 #include "l_string.h"
 
 char *
-tb_strcatdx(char *str, char delim, int num, ...)
+l_strcatdx(char *str, char delim, int num, ...)
 {
     va_list ap;
     int dl, sl, tl;

@@ -4,7 +4,7 @@
 #include "l_string.h"
 
 int
-tb_memcmp(void *str1, void *str2, size_t size)
+l_memcmp(void *str1, void *str2, size_t size)
 {
     int ret = 0;
     while (size >= sizeof(uint64_t) &&
