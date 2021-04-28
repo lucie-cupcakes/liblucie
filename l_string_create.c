@@ -3,12 +3,11 @@
 
 #include "l_string.h"
 
-EXTERN l_string *l_string_create(l_strlen_t length, char *value) {
+l_string *l_string_create(l_strlen_t length, char *value) {
     l_string *s = calloc(1, sizeof(l_string));
     l_assert(s);
     s->value = calloc(length, 1);
     l_assert(s->value);
     l_memory_copy(s->value, value, length);
-
     return s;
 };

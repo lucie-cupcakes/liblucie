@@ -3,10 +3,11 @@
 
 #include "l_string.h"
 
-char *l_string_take_slice(char *str, int idx, int len) {
+l_string *l_string_take_slice(l_string *str, l_strlen_t idx, l_strlen_t len) {
     char *newstr = NULL;
-    int slen = tb_strlen(str);
 
-    if (((unsigned)idx) < slen && len < ((unsigned int)slen - 1)) { newstr = tb_strndup(str + idx, len); }
+    if (idx < str->length && len < (str->length - 1)) { newstr = l_string_duplicate(str + idx, len); }
+
+
     return newstr;
 }

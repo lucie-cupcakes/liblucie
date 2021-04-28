@@ -3,15 +3,14 @@
 
 #include "l_string.h"
 
-char *l_strinsert(char *str, char *insert, int idx) {
-    char *newstr;
-    int slen = tb_strlen(str), ilen = tb_strlen(insert);
+l_string *l_string_insert(l_string *str, l_string *insert, int idx) {
+    l_string *newstr;
 
     if (((unsigned int)idx) > slen) return NULL;
     if (ilen == 0) return str;
     newstr = malloc(slen + ilen + 1);
-    tb_memcpy(newstr, str, idx);
-    tb_memcpy(newstr + idx, insert, ilen);
-    tb_memcpy(newstr + idx + ilen, str + idx, slen - idx + 1);
+    l_memory_copy(newstr, str, idx);
+    l_memory_copy(newstr + idx, insert, ilen);
+    l_memory_copy(newstr + idx + ilen, str + idx, slen - idx + 1);
     return newstr;
 }
