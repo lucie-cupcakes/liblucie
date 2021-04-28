@@ -4,12 +4,13 @@
 #include "l_string.h"
 
 char *
-l_strndup(char *srcstr, int len)
+l_cstr_dup(char *c_str)
 {
     char *newstr;
+    int len = l_cstr_len(c_str);
     if ((newstr = (char *)malloc(len + 1)))
     {
-        tb_memcpy(newstr, srcstr, len);
+        tb_memcpy(newstr, c_str, len);
         newstr[len] = 0;
     }
     return newstr;

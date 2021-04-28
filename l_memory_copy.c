@@ -4,46 +4,41 @@
 #include "l_string.h"
 
 void *
-tb_memset(void *dst, int chr, size_t size)
+l_memory_copy(void *dst, void *src, size_t size)
 {
+
 #ifdef _USE_64BIT
-    uint64_t chd;
-
-    (((uint8_t *)&chd))[0] = ((uint8_t *)&chd)[1] = ((uint8_t *)&chd)[2] =
-        ((uint8_t *)&chd)[3] = ((uint8_t *)&chd)[4] = ((uint8_t *)&chd)[5] =
-            ((uint8_t *)&chd)[6] = ((uint8_t *)&chd)[7] = (uint8_t)chr;
-
     while (sizeof(uint64_t) <= size)
     {
-        *(uint64_t *)dst = chd;
+        *(uint64_t *)dst = *(uint64_t *)src;
+        src += sizeof(uint64_t);
         dst += sizeof(uint64_t);
         size -= sizeof(uint64_t);
     }
     if (sizeof(uint32_t) <= size)
     {
-        *(uint32_t *)dst = (uint32_t)chd;
+        *(uint32_t *)dst = *(uint32_t *)src;
+        src += sizeof(uint32_t);
         dst += sizeof(uint32_t);
         size -= sizeof(uint32_t);
     }
 #else
-    uint32_t chd;
-
-    (((uint8_t *)&chd))[0] = ((uint8_t *)&chd)[1] = ((uint8_t *)&chd)[2] =
-        ((uint8_t *)&chd)[3] = (uint8_t)chr;
     while (sizeof(uint32_t) <= size)
     {
-        *(uint32_t *)dst = (uint32_t)chd;
+        *(uint32_t *)dst = *(uint32_t *)src;
+        src += sizeof(uint32_t);
         dst += sizeof(uint32_t);
         size -= sizeof(uint32_t);
     }
 #endif
     if (sizeof(uint16_t) <= size)
     {
-        *(uint16_t *)dst = (uint16_t)chd;
+        *(uint16_t *)dst = *(uint16_t *)src;
+        src += sizeof(uint16_t);
         dst += sizeof(uint16_t);
         size -= sizeof(uint16_t);
     }
-    if (size) *(uint8_t *)dst = (uint8_t)chd;
+    if (size) *(uint8_t *)dst = *(uint8_t *)src;
 
     return dst;
 }

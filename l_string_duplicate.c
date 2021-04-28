@@ -4,14 +4,13 @@
 #include "l_string.h"
 
 char *
-l_strdup(char *srcstr)
+l_string_duplicate(char *srcstr, int len)
 {
     char *newstr;
-    int len = tb_strlen(srcstr);
-    if ((newstr = (char *)malloc(len + 1)))
+    if ((newstr = calloc(len + 1)))
     {
-        tb_memcpy(newstr, srcstr, len);
-        newstr[len] = 0;
+        l_memory_copy(newstr, srcstr, len);
     }
+    
     return newstr;
 }

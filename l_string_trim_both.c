@@ -3,10 +3,8 @@
 
 #include "l_string.h"
 
-int
-l_strlen(char *str)
+char *
+l_string_trim_both(char *str)
 {
-    int len = 0;
-    while (*(str++)) ++len;
-    return len;
+    return l_string_trim_right(l_string_trim_left(str));
 }

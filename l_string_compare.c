@@ -4,7 +4,7 @@
 #include "l_string.h"
 
 int
-l_strcmp(char *str1, char *str2)
+l_string_compare(char *str1, char *str2)
 {
     int res;
     while (*str1 && *str2 && !(res = *str1 - *str2))

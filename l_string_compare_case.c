@@ -4,7 +4,7 @@
 #include "l_string.h"
 
 int
-l_stricmp(char *str1, char *str2)
+l_string_compare_case(char *str1, char *str2)
 {
     char c;
     int res;

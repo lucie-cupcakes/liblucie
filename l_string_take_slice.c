@@ -4,7 +4,7 @@
 #include "l_string.h"
 
 char *
-l_strsub(char *str, int idx, int len)
+l_string_take_slice(char *str, int idx, int len)
 {
     char *newstr = NULL;
     int slen = tb_strlen(str);
