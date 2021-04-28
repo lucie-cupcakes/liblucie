@@ -3,12 +3,10 @@
 
 #include "l_string.h"
 
-int l_string_compare(char *str1, char *str2) {
-    int res;
-    while (*str1 && *str2 && !(res = *str1 - *str2)) {
-        str1++;
-        str2++;
-    }
-    if (!res) res = *str1 - *str2;
+int32_t l_string_compare(l_string *str1, l_string *str2) {
+    int32_t res, i = 0;
+
+    for (; i < str1->length && i < str2->length && !(res = str1->value[i] - str2->value[i]); i++ ) {}
+    if (!res) res = str1->value[i] - str2->value[i];
     return res < 0 ? -1 : !!res;
 }

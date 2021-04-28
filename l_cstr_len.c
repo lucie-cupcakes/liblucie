@@ -3,8 +3,8 @@
 
 #include "l_string.h"
 
-l_strlen_t l_cstr_len(const char *c_str) {
-    l_strlen_t len = 0;
+int32_t l_cstr_len(const char *c_str) {
+    int32_t len = 0;
 
     for (; c_str[len]; len++) {};
 
