@@ -3,9 +3,7 @@
 
 #include "l_string.h"
 
-void
-l_strsplit(char **str, char **split, int idx)
-{
+void l_strsplit(char **str, char **split, int idx) {
     char *newstr;
 
     if (*split) free(*split);

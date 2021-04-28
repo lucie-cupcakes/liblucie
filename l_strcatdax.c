@@ -3,14 +3,11 @@
 
 #include "l_string.h"
 
-char *
-l_strcatdax(char *str, char delim, int num, char **strarr)
-{
+char *l_strcatdax(char *str, char delim, int num, char **strarr) {
     int dl, sl, tl, idx;
 
     sl = tb_strlen(str);
-    for (idx = 0; idx < num; idx++)
-    {
+    for (idx = 0; idx < num; idx++) {
         tl = dl = tb_strlen(strarr[idx]);
         str[sl++] = delim;
         str = realloc(str, sl + dl);

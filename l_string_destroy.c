@@ -3,9 +3,7 @@
 
 #include "l_string.h"
 
-EXTERN void
-l_string_destroy(l_string *str)
-{
+EXTERN void l_string_destroy(l_string *str) {
     assert(str);
     free(str);
 };

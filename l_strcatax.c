@@ -3,14 +3,11 @@
 
 #include "l_string.h"
 
-char *
-l_strcatax(char *str, int num, char **strarr)
-{
+char *l_strcatax(char *str, int num, char **strarr) {
     int dl, sl, tl, idx;
 
     sl = tb_strlen(str);
-    for (idx = 0; idx < num; idx++)
-    {
+    for (idx = 0; idx < num; idx++) {
         tl = dl = tb_strlen(strarr[idx]);
         str = realloc(str, sl + dl);
         while (dl-- > 0) str[sl + dl] = strarr[idx][dl];

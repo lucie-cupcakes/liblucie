@@ -3,12 +3,9 @@
 
 #include "l_string.h"
 
-int
-l_string_compare(char *str1, char *str2)
-{
+int l_string_compare(char *str1, char *str2) {
     int res;
-    while (*str1 && *str2 && !(res = *str1 - *str2))
-    {
+    while (*str1 && *str2 && !(res = *str1 - *str2)) {
         str1++;
         str2++;
     }

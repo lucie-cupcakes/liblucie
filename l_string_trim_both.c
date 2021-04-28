@@ -3,8 +3,4 @@
 
 #include "l_string.h"
 
-char *
-l_string_trim_both(char *str)
-{
-    return l_string_trim_right(l_string_trim_left(str));
-}
+char *l_string_trim_both(char *str) { return l_string_trim_right(l_string_trim_left(str)); }

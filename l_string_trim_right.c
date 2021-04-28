@@ -3,9 +3,7 @@
 
 #include "l_string.h"
 
-char *
-l_string_trim_right(char *str)
-{
+char *l_string_trim_right(char *str) {
     int len = tb_strlen(str);
     while (str[len - 1] == ' ' || str[len - 1] == '\t') --len;
     return tb_strndup(str, len);

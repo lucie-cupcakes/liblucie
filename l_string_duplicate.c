@@ -3,9 +3,7 @@
 
 #include "l_string.h"
 
-char *
-l_string_duplicate(char *srcstr, int len)
-{
+char *l_string_duplicate(char *srcstr, int len) {
     char *newstr;
     if ((newstr = calloc(len + 1))) { l_memory_copy(newstr, srcstr, len); }
 

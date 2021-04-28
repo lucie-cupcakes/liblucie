@@ -3,19 +3,14 @@
 
 #include "l_string.h"
 
-void
-l_string_replace(char **str, char *findstr, char *replace)
-{
+void l_string_replace(char **str, char *findstr, char *replace) {
     char *newstr, *fs;
-    int idx = 0, slen = tb_strlen(*str), flen = tb_strlen(findstr),
-        rlen = tb_strlen(replace);
+    int idx = 0, slen = tb_strlen(*str), flen = tb_strlen(findstr), rlen = tb_strlen(replace);
 
     newstr = tb_strdup(*str);
-    while ((fs = tb_strfind(newstr + idx, findstr)))
-    {
+    while ((fs = tb_strfind(newstr + idx, findstr))) {
         idx = fs - newstr;
-        if (!(fs = (char *)malloc(slen + rlen - flen + 1)))
-        {
+        if (!(fs = (char *)malloc(slen + rlen - flen + 1))) {
             free(newstr);
             newstr = NULL;
             break;

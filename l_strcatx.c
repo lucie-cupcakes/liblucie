@@ -3,17 +3,14 @@
 
 #include "l_string.h"
 
-char *
-l_strcatx(char *str, int num, ...)
-{
+char *l_strcatx(char *str, int num, ...) {
     va_list ap;
     int dl, sl, tl;
     char *arg;
 
     sl = tb_strlen(str);
     va_start(ap, num);
-    while (num-- > 0)
-    {
+    while (num-- > 0) {
         arg = va_arg(ap, char *);
         tl = dl = tb_strlen(arg);
         str = realloc(str, sl + dl + 1);

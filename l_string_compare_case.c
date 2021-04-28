@@ -3,15 +3,12 @@
 
 #include "l_string.h"
 
-int
-l_string_compare_case(char *str1, char *str2)
-{
+int l_string_compare_case(char *str1, char *str2) {
     char c;
     int res;
     while (*str1 && *str2 &&
            !(res = (((unsigned)(c = *str1 & '_') - 'A') < 26 ? c : *str1) -
-                   (((unsigned)(c = *str2 & '_') - 'A') < 26 ? c : *str2)))
-    {
+                   (((unsigned)(c = *str2 & '_') - 'A') < 26 ? c : *str2))) {
         str1++;
         str2++;
     }

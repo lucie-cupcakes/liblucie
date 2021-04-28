@@ -30,76 +30,54 @@
 
 typedef int32_t l_strlen_t
 
-    typedef struct
-{
+    typedef struct {
     l_strlen_t length;
     char *value;
 } l_string;
 
 // Null Terminated & C Language Tools
 #if defined(LUCIE_USE_STDLIB) || defined(_BUILDLIB)
-#define l_cstr_len(x) (l_strlen_t)strlen(x)
+#define l_cstr_len(x) (l_strlen_t) strlen(x)
 #define l_cstr_dup(x) strdup(x)
 #define l_memory_copy(dst, src, size) memcpy(dst, src, size)
 #define l_memory_set(dst, chr, size) memset(dst, chr, size)
 #define l_memory_compare(buff1, buff2, size) memcmp(buff1, buff2, size)
 #else
-EXTERN l_strlen_t
-l_cstr_len(char *c_str);
-EXTERN char *
-l_cstr_dup(char *c_str);
-EXTERN void *
-l_memory_copy(void *dst, void *src, size_t size);
-EXTERN void *
-l_memory_set(void *dst, int chr, size_t size);
-EXTERN int
-l_memory_compare(void *buff1, void *buff2, size_t size);
+EXTERN l_strlen_t l_cstr_len(char *c_str);
+EXTERN char *l_cstr_dup(char *c_str);
+EXTERN void *l_memory_copy(void *dst, void *src, size_t size);
+EXTERN void *l_memory_set(void *dst, int chr, size_t size);
+EXTERN int l_memory_compare(void *buff1, void *buff2, size_t size);
 #endif
 
 // Lucie's String
-EXTERN l_string *
-l_string_create(l_strlen_t length, char *value);
+EXTERN l_string *l_string_create(l_strlen_t length, char *value);
 
-EXTERN void
-l_string_destroy(l_string *str);
+EXTERN void l_string_destroy(l_string *str);
 
-EXTERN l_string *
-l_string_duplicate(l_string *str);
+EXTERN l_string *l_string_duplicate(l_string *str);
 
-EXTERN l_string *
-l_string_trim_left(l_string *str);
-EXTERN l_string *
-l_string_trim_right(l_string *str);
-EXTERN l_string *
-l_string_trim_both(l_string *str);
+EXTERN l_string *l_string_trim_left(l_string *str);
+EXTERN l_string *l_string_trim_right(l_string *str);
+EXTERN l_string *l_string_trim_both(l_string *str);
 
-EXTERN l_string *
-l_string_take_slice(l_string *str, int idx, int len);
+EXTERN l_string *l_string_take_slice(l_string *str, int idx, int len);
 
-EXTERN l_string *
-l_string_insert(l_string *str, char *insert, int idx);
+EXTERN l_string *l_string_insert(l_string *str, char *insert, int idx);
 
-EXTERN l_string *
-l_string_find(l_string *str, char *findstr);
+EXTERN l_string *l_string_find(l_string *str, char *findstr);
 
-EXTERN void
-l_string_split(char **str, char **splt, int idx);
+EXTERN void l_string_split(char **str, char **splt, int idx);
 
-EXTERN void
-l_string_replace(char **str, char *findstr, char *replace);
+EXTERN void l_string_replace(char **str, char *findstr, char *replace);
 
-EXTERN int
-l_string_compare(l_string *str1, l_string *str2);
-EXTERN int
-l_string_compare_case(l_string *str1, l_string *str2);
+EXTERN int l_string_compare(l_string *str1, l_string *str2);
+EXTERN int l_string_compare_case(l_string *str1, l_string *str2);
 
 // Not sure what to do with these yet:
-EXTERN char *
-l_strcatdx(l_string *str, char delim, int num, ...);
-EXTERN char *
-l_strcatax(l_string *str, int num, char **strarr);
-EXTERN char *
-l_strcatdax(l_string *str, char delim, int num, char **strarr);
+EXTERN char *l_strcatdx(l_string *str, char delim, int num, ...);
+EXTERN char *l_strcatax(l_string *str, int num, char **strarr);
+EXTERN char *l_strcatdax(l_string *str, char delim, int num, char **strarr);
 
 #undef EXTERN
 #endif // L_STRING_H_INCLUDED

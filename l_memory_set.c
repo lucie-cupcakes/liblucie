@@ -3,24 +3,20 @@
 
 #include "l_string.h"
 
-void *
-l_memory_set(void *dst, int chr, size_t size)
-{
+void *l_memory_set(void *dst, int chr, size_t size) {
 #ifdef _USE_64BIT
     uint64_t chd;
 
-    (((uint8_t *)&chd))[0] = ((uint8_t *)&chd)[1] = ((uint8_t *)&chd)[2] =
-        ((uint8_t *)&chd)[3] = ((uint8_t *)&chd)[4] = ((uint8_t *)&chd)[5] =
-            ((uint8_t *)&chd)[6] = ((uint8_t *)&chd)[7] = (uint8_t)chr;
+    (((uint8_t *)&chd))[0] = ((uint8_t *)&chd)[1] = ((uint8_t *)&chd)[2] = ((uint8_t *)&chd)[3] =
+        ((uint8_t *)&chd)[4] = ((uint8_t *)&chd)[5] = ((uint8_t *)&chd)[6] = ((uint8_t *)&chd)[7] =
+            (uint8_t)chr;
 
-    while (sizeof(uint64_t) <= size)
-    {
+    while (sizeof(uint64_t) <= size) {
         *(uint64_t *)dst = chd;
         dst += sizeof(uint64_t);
         size -= sizeof(uint64_t);
     }
-    if (sizeof(uint32_t) <= size)
-    {
+    if (sizeof(uint32_t) <= size) {
         *(uint32_t *)dst = (uint32_t)chd;
         dst += sizeof(uint32_t);
         size -= sizeof(uint32_t);
@@ -28,17 +24,15 @@ l_memory_set(void *dst, int chr, size_t size)
 #else
     uint32_t chd;
 
-    (((uint8_t *)&chd))[0] = ((uint8_t *)&chd)[1] = ((uint8_t *)&chd)[2] =
-        ((uint8_t *)&chd)[3] = (uint8_t)chr;
-    while (sizeof(uint32_t) <= size)
-    {
+    (((uint8_t *)&chd))[0] = ((uint8_t *)&chd)[1] = ((uint8_t *)&chd)[2] = ((uint8_t *)&chd)[3] =
+        (uint8_t)chr;
+    while (sizeof(uint32_t) <= size) {
         *(uint32_t *)dst = (uint32_t)chd;
         dst += sizeof(uint32_t);
         size -= sizeof(uint32_t);
     }
 #endif
-    if (sizeof(uint16_t) <= size)
-    {
+    if (sizeof(uint16_t) <= size) {
         *(uint16_t *)dst = (uint16_t)chd;
         dst += sizeof(uint16_t);
         size -= sizeof(uint16_t);
