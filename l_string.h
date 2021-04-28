@@ -13,6 +13,14 @@
 #define EXTERN
 #endif
 
+typedef int32_t l_strlen_t
+
+    typedef struct
+{
+    l_strlen_t length;
+    char *value;
+} l_string;
+
 // Null Terminated & C Language Tools
 
 EXTERN int
@@ -28,14 +36,6 @@ EXTERN int
 l_memory_compare(void *str1, void *str2, size_t size);
 
 // Lucie's String
-
-typedef int32_t l_strlen_t
-
-    typedef struct
-{
-    l_strlen_t length;
-    char *value;
-} l_string;
 
 EXTERN l_string *
 l_string_create(l_strlen_t length, char *value);
