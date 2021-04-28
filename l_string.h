@@ -3,15 +3,30 @@
 
 #ifndef L_STRING_H_INCLUDED
 #define L_STRING_H_INCLUDED
+
+// C-STD Library
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include <assert.h>
+
+#ifdef LUCIE_USE_STDLIB
+#include <string.h>
+#endif
+
 #ifndef _BUILDLIB
 #define EXTERN extern
 #else
 #define EXTERN
 #endif
+
+#ifndef l_assert
+#ifdef LUCIE_NO_ASSERT
+#define l_assert(x)
+#else
+#include <assert.h>
+#define l_assert(x) assert(x)
+#endif
+#endif // l_assert
 
 typedef int32_t l_strlen_t
 
@@ -22,21 +37,26 @@ typedef int32_t l_strlen_t
 } l_string;
 
 // Null Terminated & C Language Tools
-
-EXTERN int
+#if defined(LUCIE_USE_STDLIB) || defined(_BUILDLIB)
+#define l_cstr_len(x) (l_strlen_t)strlen(x)
+#define l_cstr_dup(x) strdup(x)
+#define l_memory_copy(dst, src, size) memcpy(dst, src, size)
+#define l_memory_set(dst, chr, size) memset(dst, chr, size)
+#define l_memory_compare(buff1, buff2, size) memcmp(buff1, buff2, size)
+#else
+EXTERN l_strlen_t
 l_cstr_len(char *c_str);
 EXTERN char *
 l_cstr_dup(char *c_str);
-
 EXTERN void *
 l_memory_copy(void *dst, void *src, size_t size);
 EXTERN void *
 l_memory_set(void *dst, int chr, size_t size);
 EXTERN int
-l_memory_compare(void *str1, void *str2, size_t size);
+l_memory_compare(void *buff1, void *buff2, size_t size);
+#endif
 
 // Lucie's String
-
 EXTERN l_string *
 l_string_create(l_strlen_t length, char *value);
 
