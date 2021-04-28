@@ -30,7 +30,7 @@
 
 typedef int32_t l_strlen_t
 
-typedef struct {
+    typedef struct {
     l_strlen_t length;
     char *value;
 } l_string;
@@ -59,7 +59,7 @@ EXTERN l_string *l_string_trim_right(l_string *str);
 EXTERN l_string *l_string_trim_both(l_string *str);
 EXTERN l_string *l_string_take_slice(l_string *str, l_strlen_t idx, l_strlen_t len);
 EXTERN l_string *l_string_insert(l_string *str, l_string *insert, int idx);
-EXTERN l_string *l_string_find(l_string *str,l_string *findstr);
+EXTERN l_string *l_string_find(l_string *str, l_string *findstr);
 // EXTERN void l_string_split(l_string *str, l_string **splt, int idx);
 // EXTERN void l_string_replace(char **str, char *findstr, char *replace);
 EXTERN int l_string_compare(l_string *str1, l_string *str2);

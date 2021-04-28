@@ -8,6 +8,5 @@ l_string *l_string_take_slice(l_string *str, l_strlen_t idx, l_strlen_t len) {
 
     if (idx < str->length && len < (str->length - 1)) { newstr = l_string_duplicate(str + idx, len); }
 
-
     return newstr;
 }
