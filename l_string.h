@@ -31,20 +31,20 @@ l_memory_compare(void *str1, void *str2, size_t size);
 
 typedef int32_t l_strlen_t
 
-typedef struct
+    typedef struct
 {
     l_strlen_t length;
     char *value;
 } l_string;
 
 EXTERN l_string *
-l_string_create(l_strlen_t length, char* value);
+l_string_create(l_strlen_t length, char *value);
 
 EXTERN void
-l_string_destroy(l_string* str);
+l_string_destroy(l_string *str);
 
 EXTERN l_string *
-l_string_duplicate(l_string* str);
+l_string_duplicate(l_string *str);
 
 EXTERN l_string *
 l_string_trim_left(l_string *str);

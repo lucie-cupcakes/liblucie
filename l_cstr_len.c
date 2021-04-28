@@ -9,6 +9,6 @@ l_cstr_len(const char *c_str)
     l_strlen_t len = 0;
 
     for (; c_str[len]; len++) {};
-    
+
     return len;
 }
