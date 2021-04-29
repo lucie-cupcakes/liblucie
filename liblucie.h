@@ -4,7 +4,69 @@
 #ifndef LUCIE_LIB_INCLUDED
 #define LUCIE_LIB_INCLUDED
 
+// C-STD Library
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdarg.h>
+
+#ifdef LUCIE_USE_STDLIB
 #include <string.h>
+#endif
+
+#ifndef _BUILDLIB
+#define EXTERN extern
+#else
+#define EXTERN
+#endif
+
+#ifndef l_assert
+#if defined(LUCIE_NO_ASSERT) || defined(NDEBUG)
+#define l_assert(x)
+#else
+#include <assert.h>
+#define l_assert(x) assert(x)
+#endif
+#endif // l_assert
+
+typedef struct {
+    int32_t length;
+    char *value;
+} l_string;
+
+// Null Terminated & C Language Tools
+#if defined(LUCIE_USE_STDLIB) || defined(_BUILDLIB)
+#define l_cstr_len(x) (int32_t) strlen(x)
+#define l_cstr_dup(x) strdup(x)
+#define l_memory_copy(dst, src, size) memcpy(dst, src, size)
+#define l_memory_set(dst, chr, size) memset(dst, chr, size)
+#define l_memory_compare(buff1, buff2, size) memcmp(buff1, buff2, size)
+#else
+EXTERN int32_t l_cstr_len(char *c_str);
+EXTERN char *l_cstr_dup(char *c_str);
+EXTERN void *l_memory_copy(void *dst, void *src, size_t size);
+EXTERN void *l_memory_set(void *dst, int chr, size_t size);
+EXTERN int l_memory_compare(void *buff1, void *buff2, size_t size);
+#endif // LUCIE_USE_STDLIB
+
+// Lucie's String
+EXTERN l_string *l_string_create(int32_t length, const char *value);
+EXTERN void l_string_destroy(l_string *str);
+EXTERN l_string *l_string_duplicate(l_string *str);
+EXTERN l_string *l_string_trim_left(l_string *str);
+EXTERN l_string *l_string_trim_right(l_string *str);
+EXTERN l_string *l_string_trim_both(l_string *str);
+EXTERN l_string *l_string_take_slice(l_string *str, int32_t idx, int32_t len);
+EXTERN l_string *l_string_insert(l_string *str, l_string *insert, int32_t idx);
+EXTERN l_string *l_string_find(l_string *str, l_string *findstr);
+// EXTERN void l_string_split(l_string *str, l_string **splt, int idx);
+// EXTERN void l_string_replace(char **str, char *findstr, char *replace);
+EXTERN int32_t l_string_compare(l_string *str1, l_string *str2);
+EXTERN int32_t l_string_compare_case(l_string *str1, l_string *str2);
+
+// Not sure what to do with these yet:
+// EXTERN char *l_strcatdx(l_string *str, char delim, int num, ...);
+// EXTERN char *l_strcatax(l_string *str, int num, char **strarr);
+// EXTERN char *l_strcatdax(l_string *str, char delim, int num, char **strarr);
 
 /* @brief Duplicates a string.
  * This function calls malloc,
@@ -16,7 +78,7 @@
  */
 char *
 l_strn_dup(const char *str, size_t str_len);
-#define l_str_dup(str) l_strn_dup(str, strlen(str))
+#define l_str_dup(str) l_strn_dup(str, l_cstr_len(str))
 
 /* @brief Concatenates multiple strings into one buffer.
  * @param str Destination a string capable of holding all the desired
@@ -49,8 +111,8 @@ l_int_base_to_str(int num, int base, char *seq, char *out_buff);
 int
 l_strn_to_int_base(const char *str, size_t str_len, int base, char *seq);
 #define l_str_to_int_base(str, base, seq)                                      \
-    l_strn_to_int_base(str, strlen(str), base, seq)
-#define l_str_to_int(str) l_strn_to_int_base(str, strlen(str), 10, NULL)
+    l_strn_to_int_base(str, l_cstr_len(str), base, seq)
+#define l_str_to_int(str) l_strn_to_int_base(str, l_cstr_len(str), 10, NULL)
 #define l_strn_to_int(str, str_len) l_strn_to_int_base(str, str_len, 10, NULL)
 
 /* @brief Gives the length of a string up to a delimiter.
@@ -66,7 +128,7 @@ int
 l_strn_slice(const char *str, size_t str_len, const char del,
              size_t *out_slice_len);
 #define l_str_slice(str, del, out_slice_len)                                   \
-    l_strn_slice(str, strlen(str), del, out_slice_len)
+    l_strn_slice(str, l_cstr_len(str), del, out_slice_len)
 
 /* @brief Checks whenever a string is surronded by a character.
  * Useful for detecting quoted strings.
@@ -77,7 +139,7 @@ l_strn_slice(const char *str, size_t str_len, const char del,
  */
 int
 l_strn_is_surrc(const char *str, size_t str_len, const char c);
-#define l_str_is_surrc(str, c) l_strn_is_surrc(str, strlen(str), c)
+#define l_str_is_surrc(str, c) l_strn_is_surrc(str, l_cstr_len(str), c)
 
 /* @brief Removes a character from a string being surronded by it.
  * Useful for removing quotes.
@@ -88,7 +150,7 @@ l_strn_is_surrc(const char *str, size_t str_len, const char c);
  */
 char *
 l_strn_rm_surrc(char *str, size_t str_len, const char c);
-#define l_str_rm_surrc(str, c) l_strn_rm_surrc(str, strlen(str), c)
+#define l_str_rm_surrc(str, c) l_strn_rm_surrc(str, l_cstr_len(str), c)
 
 /* @brief Removes leading whitespace from a string.
  * @param str: Input string.
@@ -97,7 +159,7 @@ l_strn_rm_surrc(char *str, size_t str_len, const char c);
  */
 char *
 l_strn_trim_left(char *str, size_t str_len);
-#define l_str_trim_left(str) l_strn_trim_left(str, strlen(str))
+#define l_str_trim_left(str) l_strn_trim_left(str, l_cstr_len(str))
 
 /* @brief Removes leading whitespace from a string.
  * Does not modify the input.
@@ -107,7 +169,7 @@ l_strn_trim_left(char *str, size_t str_len);
  */
 size_t
 l_strn_trim_left_ro(const char *str, size_t str_len);
-#define l_str_trim_left_ro(str) l_strn_trim_left_ro(str, strlen(str))
+#define l_str_trim_left_ro(str) l_strn_trim_left_ro(str, l_cstr_len(str))
 
 /* @brief Removes whitespace from the right side of a string.
  * @param str: Input string.
@@ -116,7 +178,7 @@ l_strn_trim_left_ro(const char *str, size_t str_len);
  */
 char *
 l_strn_trim_right(char *str, size_t str_len);
-#define l_str_trim_right(str) l_strn_trim_right(str, strlen(str))
+#define l_str_trim_right(str) l_strn_trim_right(str, l_cstr_len(str))
 
 /* @brief Removes whitespace from the right side of a string.
  * Does not modify the input.
@@ -126,7 +188,7 @@ l_strn_trim_right(char *str, size_t str_len);
  */
 size_t
 l_strn_trim_right_ro(const char *str, size_t str_len);
-#define l_str_trim_right_ro(str) l_strn_trim_right_ro(str, strlen(str))
+#define l_str_trim_right_ro(str) l_strn_trim_right_ro(str, l_cstr_len(str))
 
 /* @brief Checks if a string starts with another.
  * @param haystack: Input string.
@@ -139,7 +201,7 @@ int
 l_strn_starts_with(const char *haystack, const char *needle,
                    size_t haystack_len, size_t needle_len);
 #define l_str_starts_with(haystack, needle)                                    \
-    l_strn_starts_with(haystack, needle, strlen(haystack), strlen(needle))
+    l_strn_starts_with(haystack, needle, l_cstr_len(haystack), l_cstr_len(needle))
 
 /* @brief Counts how many time a character is inside a string
  * @param str: Input string.
@@ -149,6 +211,7 @@ l_strn_starts_with(const char *haystack, const char *needle,
  */
 size_t
 l_strn_char_cnt(const char *str, size_t str_len, const char c);
-#define l_str_char_cnt(str, c) l_strn_char_cnt(str, strlen(str_len), c)
+#define l_str_char_cnt(str, c) l_strn_char_cnt(str, l_cstr_len(str_len), c)
 
+#undef EXTERN
 #endif // LUCIE_LIB_INCLUDED
