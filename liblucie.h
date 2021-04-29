@@ -31,23 +31,14 @@
 
 typedef struct {
     int32_t length;
-    char *value;
+    const char *value;
 } l_string;
 
-// Null Terminated & C Language Tools
-#if defined(LIBLUCIE_USE_STDLIB) || defined(_BUILDLIB)
-#define l_cstr_len(x) (int32_t) strlen(x)
-#define l_cstr_dup(x) strdup(x)
-#define l_memory_copy(dst, src, size) memcpy(dst, src, size)
-#define l_memory_set(dst, chr, size) memset(dst, chr, size)
-#define l_memory_compare(buff1, buff2, size) memcmp(buff1, buff2, size)
-#else
 EXTERN int32_t l_cstr_len(const char *c_str);
 EXTERN char *l_cstr_dup(const char *c_str);
 EXTERN void *l_memory_copy(void *dst, void *src, size_t size);
 EXTERN void *l_memory_set(void *dst, int chr, size_t size);
 EXTERN int l_memory_compare(void *buff1, void *buff2, size_t size);
-#endif // LIBLUCIE_USE_STDLIB
 
 // Lucie's String
 EXTERN l_string *l_string_create(int32_t length, const char *value);
@@ -78,7 +69,6 @@ EXTERN int32_t l_string_compare_case(l_string *str1, l_string *str2);
  * @return Pointer to new allocated string.
  */
 EXTERN char *l_strn_dup(const char *str, size_t str_len);
-#define l_str_dup(str) l_strn_dup(str, l_cstr_len(str))
 
 /* @brief Concatenates multiple strings into one buffer.
  * @param str Destination a string capable of holding all the desired

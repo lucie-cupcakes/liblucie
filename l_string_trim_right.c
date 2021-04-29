@@ -3,8 +3,8 @@
 
 #include "l_string.h"
 
-char *l_string_trim_right(char *str) {
-    int len = tb_strlen(str);
-    while (str[len - 1] == ' ' || str[len - 1] == '\t') --len;
-    return tb_strndup(str, len);
+l_string *l_string_trim_right(l_string *str) {
+	int32_t new_len = str->length;
+    while (str[new_len - 1] == ' ' || str[new_len - 1] == '\t') --new_len;
+    return tb_strndup(str, new_len);
 }
