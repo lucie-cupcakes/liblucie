@@ -1,5 +1,5 @@
 // Copyright (c) 2021 Lucie Cupcakes <lucie_linux@protonmail.com>
-// Licensed under BSD-3-Clause - https://spdx.org/licenses/BSD-3-Clause
+// Licensed under MIT License - https://github.com/lucie-cupcakes/liblucie/blob/main/LICENSE
 
 #include "l_string.h"
 

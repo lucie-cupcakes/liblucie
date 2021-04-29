@@ -1,7 +1,5 @@
-/* Go visit https://github.com/lucie-cupcakes/liblucie for the latest version
- * MIT License, more info read FILE LICENSE or visit
- * https://github.com/lucie-cupcakes/liblucie/blob/main/LICENSE
- */
+// Copyright (c) 2021 Lucie Cupcakes <lucie_linux@protonmail.com>
+// Licensed under MIT License - https://github.com/lucie-cupcakes/liblucie/blob/main/LICENSE
 
 #ifndef LUCIE_LIB_INCLUDED
 #define LUCIE_LIB_INCLUDED
