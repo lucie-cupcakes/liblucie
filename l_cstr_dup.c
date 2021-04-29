@@ -3,7 +3,7 @@
 
 #include "l_string.h"
 
-char *l_cstr_dup(char *c_str) {
+char *l_cstr_dup(const char *c_str) {
     char *newstr;
     int32_t len = l_cstr_len(c_str);
     if ((newstr = calloc(len + 1))) { l_memory_copy(newstr, c_str, len); }

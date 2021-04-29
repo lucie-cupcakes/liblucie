@@ -1,11 +1,8 @@
-/* Go visit https://github.com/lucie-cupcakes/liblucie for the latest version
- * MIT License, more info read FILE LICENSE or visit
- * https://github.com/lucie-cupcakes/liblucie/blob/main/LICENSE
- */
+// Copyright (c) 2021 Lucie Cupcakes <lucie_linux@protonmail.com>
+// Licensed under MIT License - https://github.com/lucie-cupcakes/liblucie/blob/main/LICENSE
 
 #include "liblucie.h"
-#include <assert.h>
-#include <ctype.h>
+
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,7 +11,7 @@
 char *
 l_strn_dup(const char *str, size_t s_len)
 {
-    assert(str);
+    l_assert(str);
     s_len++;
     char *ptr = calloc(s_len + 1, 1);
     return ptr ? memcpy(ptr, str, s_len) : ptr;
@@ -23,7 +20,7 @@ l_strn_dup(const char *str, size_t s_len)
 char *
 l_str_catx(char *str, ...)
 {
-    assert(str);
+    l_assert(str);
     char *arg;
     va_list ap;
     size_t dl = 0;
@@ -62,8 +59,8 @@ l_int_base_to_str(int num, int base, char *seq, char *out_buff)
 int
 l_strn_to_int_base(const char *str, size_t str_len, int base, char *seq)
 {
-    assert(str);
-    assert(str_len);
+    l_assert(str);
+    l_assert(str_len);
     char *val = seq ? seq : "0123456789ABCDEF";
     int rc = 0;
     for (size_t i = 0; i < str_len; i++)
@@ -85,9 +82,9 @@ int
 l_strn_slice(const char *str, size_t str_len, const char del,
              size_t *out_slice_len)
 {
-    assert(str);
-    assert(str_len);
-    assert(out_slice_len);
+    l_assert(str);
+    l_assert(str_len);
+    l_assert(out_slice_len);
     size_t found = 0;
     size_t off = 0;
     for (; off < str_len && !found; off++)
@@ -101,16 +98,16 @@ l_strn_slice(const char *str, size_t str_len, const char del,
 int
 l_strn_is_surrc(const char *str, size_t str_len, const char c)
 {
-    assert(str);
-    assert(str_len);
+    l_assert(str);
+    l_assert(str_len);
     return (str[str_len - 1] == c && str[0] == c) ? 1 : 0;
 }
 
 char *
 l_strn_rm_surrc(char *str, size_t str_len, const char c)
 {
-    assert(str);
-    assert(str_len);
+    l_assert(str);
+    l_assert(str_len);
     if (str[str_len - 1] == c && str[0] == c)
     {
         str[0] = 0;
@@ -125,8 +122,8 @@ l_strn_rm_surrc(char *str, size_t str_len, const char c)
 char *
 l_strn_trim_left(char *str, size_t str_len)
 {
-    assert(str);
-    assert(str_len);
+    l_assert(str);
+    l_assert(str_len);
     size_t l_off = 0;
     for (; l_off < str_len && isspace(str[l_off]); l_off++) { str[l_off] = 0; }
     return &str[0] + l_off;
@@ -135,8 +132,8 @@ l_strn_trim_left(char *str, size_t str_len)
 char *
 l_strn_trim_right(char *str, size_t str_len)
 {
-    assert(str);
-    assert(str_len);
+    l_assert(str);
+    l_assert(str_len);
     for (size_t i = str_len - 1; i >= str_len - 1; i--)
     {
         if (isspace(str[i]))
@@ -155,8 +152,8 @@ l_strn_trim_right(char *str, size_t str_len)
 size_t
 l_strn_trim_left_ro(const char *str, size_t str_len)
 {
-    assert(str);
-    assert(str_len);
+    l_assert(str);
+    l_assert(str_len);
     size_t i = 0;
     for (; i < str_len && isspace(str[i]); i++)
         ;
@@ -166,8 +163,8 @@ l_strn_trim_left_ro(const char *str, size_t str_len)
 size_t
 l_strn_trim_right_ro(const char *str, size_t str_len)
 {
-    assert(str);
-    assert(str_len);
+    l_assert(str);
+    l_assert(str_len);
     for (size_t i = str_len - 1; i >= str_len - 1; i--)
     {
         if (isspace(str[i])) { str_len--; }
@@ -183,10 +180,10 @@ int
 l_strn_starts_with(const char *haystack, const char *needle,
                    size_t haystack_len, size_t needle_len)
 {
-    assert(haystack);
-    assert(needle);
-    assert(haystack_len);
-    assert(needle_len);
+    l_assert(haystack);
+    l_assert(needle);
+    l_assert(haystack_len);
+    l_assert(needle_len);
 
     int rc = (haystack[0] && needle[0] && haystack[0] == needle[0]);
     for (size_t i = 1; rc && i < haystack_len && i < needle_len; i++)
@@ -199,8 +196,8 @@ l_strn_starts_with(const char *haystack, const char *needle,
 size_t
 l_strn_char_cnt(const char *str, size_t str_len, const char c)
 {
-    assert(str);
-    assert(str_len);
+    l_assert(str);
+    l_assert(str_len);
     size_t res = 0;
     for (size_t i = 0; i < str_len; i++)
     {
