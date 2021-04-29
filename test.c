@@ -16,19 +16,15 @@
 #define run_test(x) run_test_f(#x, x())
 #define mkbool(x) ((x) ? 1 : 0)
 #define mzero(x) memset(x, 0, sizeof(x))
-#define free_if(x)                                                             \
+#define free_if(x)                                                                                           \
     if (x) { free(x); }
 
-int
-run_test_f(const char *name, int result)
-{
+int run_test_f(const char *name, int result) {
     printf("TEST %s = %s\n", name, result ? "OK" : "FAIL");
     return result;
 }
 
-int
-test_l_str_dup()
-{
+int test_l_str_dup() {
     const char *e = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
     char *ret = l_str_dup(e);
     int test_ok = (strcmp(ret, e) == 0);
@@ -36,16 +32,13 @@ test_l_str_dup()
     return test_ok;
 }
 
-int
-test_l_str_catx()
-{
+int test_l_str_catx() {
     char buff[64] = {0};
     const char *expected = "Lorem ipsum dolor sit amet.";
     int test_ok = 0;
     char *buff_p = buff;
     mzero(buff);
-    const char *ret =
-        l_str_catx(buff_p, "Lorem ", "ipsum ", "dolor ", "sit ", "amet.", NULL);
+    const char *ret = l_str_catx(buff_p, "Lorem ", "ipsum ", "dolor ", "sit ", "amet.", NULL);
     /* Function must return a pointer to str, and also have the string concated
      * as expected. */
     test_ok = mkbool(ret == buff_p && strcmp(buff_p, expected) == 0);
@@ -57,9 +50,7 @@ test_l_str_catx()
     return test_ok;
 }
 
-int
-test_l_int_base_to_str()
-{
+int test_l_int_base_to_str() {
     char buff[64] = {0};
     const char *expected;
     expected = "142554060";
@@ -75,15 +66,9 @@ test_l_int_base_to_str()
     return test_ok;
 }
 
-int
-test_l_str_to_int_base()
-{
-    return mkbool(l_str_to_int_base("142554060", 10, NULL) == 142554060);
-}
+int test_l_str_to_int_base() { return mkbool(l_str_to_int_base("142554060", 10, NULL) == 142554060); }
 
-int
-test_l_str_slice()
-{
+int test_l_str_slice() {
     char str[64] = {0}, out[64] = {0};
     int found = 0;
     size_t slice_len;
@@ -99,9 +84,7 @@ test_l_str_slice()
     return mkbool(strcmp(out_p, "Greetings;;From;This;Code;") == 0);
 }
 
-int
-test_l_str_is_surrc()
-{
+int test_l_str_is_surrc() {
     char str[64] = {0};
     char *str_p = &str[0];
     strcpy(str, "\"Hello World\"");
@@ -116,18 +99,14 @@ test_l_str_is_surrc()
     return test_ok;
 }
 
-int
-test_l_str_rm_surrc()
-{
+int test_l_str_rm_surrc() {
     char str[64] = {0};
     char *str_p = &str[0];
     strcpy(str, "\"Hello World\"");
     return mkbool(strcmp(l_str_rm_surrc(str_p, '\"'), "Hello World") == 0);
 }
 
-int
-test_l_strn_trim_left()
-{
+int test_l_strn_trim_left() {
     const char *expected = "Test";
     char str[16] = {0};
     strcpy(str, "  \tTest");
@@ -137,9 +116,7 @@ test_l_strn_trim_left()
     return mkbool(strcmp(res, expected) == 0);
 }
 
-int
-test_l_strn_trim_left_ro()
-{
+int test_l_strn_trim_left_ro() {
     const char *expected = "Test";
     char str[16] = {0};
     strcpy(str, "  \tTest");
@@ -147,9 +124,7 @@ test_l_strn_trim_left_ro()
     return mkbool(strcmp(&str[0] + offset, expected) == 0);
 }
 
-int
-test_l_strn_trim_right()
-{
+int test_l_strn_trim_right() {
     const char *expected = "Test";
     char str[16] = {0};
     strcpy(str, "Test\t   ");
@@ -159,9 +134,7 @@ test_l_strn_trim_right()
     return mkbool(strcmp(res, expected) == 0);
 }
 
-int
-test_l_strn_trim_right_ro()
-{
+int test_l_strn_trim_right_ro() {
     const char *expected = "Test";
     char str[32] = {0};
     strcpy(str, "Test\t  ");
@@ -169,9 +142,7 @@ test_l_strn_trim_right_ro()
     return mkbool(memcmp(&str[0], expected, len) == 0);
 }
 
-int
-test_l_strn_starts_with()
-{
+int test_l_strn_starts_with() {
     const char *h1 = "Needle Haystack";
     const char *n1 = "Needle";
     int test_ok = mkbool(l_strn_starts_with(h1, n1, strlen(h1), strlen(n1)));
@@ -184,29 +155,20 @@ test_l_strn_starts_with()
     return test_ok;
 }
 
-int
-test_l_strn_char_cnt()
-{
+int test_l_strn_char_cnt() {
     // @TODO
     // size_t l_strn_char_cnt(const char *str, size_t str_len, const char c);
     fprintf(stderr, "Warning: test_l_strn_char_cnt not yet implemented.\n");
     return 1;
 }
 
-int
-main(int argc, char **argv)
-{
-    if (sizeof(argc) ||
-        sizeof(argv)) // Only putting this to avoid Compiler Warning
-        return (run_test(test_l_str_dup) && run_test(test_l_str_catx) &&
-                run_test(test_l_int_base_to_str) &&
-                run_test(test_l_str_to_int_base) &&
-                run_test(test_l_str_slice) && run_test(test_l_str_is_surrc) &&
-                run_test(test_l_str_rm_surrc)) &&
-                       run_test(test_l_strn_trim_left) &&
-                       run_test(test_l_strn_trim_left_ro) &&
-                       run_test(test_l_strn_trim_right_ro) &&
-                       run_test(test_l_strn_starts_with) &&
+int main(int argc, char **argv) {
+    if (sizeof(argc) || sizeof(argv)) // Only putting this to avoid Compiler Warning
+        return (run_test(test_l_str_dup) && run_test(test_l_str_catx) && run_test(test_l_int_base_to_str) &&
+                run_test(test_l_str_to_int_base) && run_test(test_l_str_slice) &&
+                run_test(test_l_str_is_surrc) && run_test(test_l_str_rm_surrc)) &&
+                       run_test(test_l_strn_trim_left) && run_test(test_l_strn_trim_left_ro) &&
+                       run_test(test_l_strn_trim_right_ro) && run_test(test_l_strn_starts_with) &&
                        run_test(test_l_strn_char_cnt)
                    ? 0
                    : 1;

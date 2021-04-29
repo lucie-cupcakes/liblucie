@@ -8,18 +8,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-char *
-l_strn_dup(const char *str, size_t s_len)
-{
+char *l_strn_dup(const char *str, size_t s_len) {
     l_assert(str);
     s_len++;
     char *ptr = calloc(s_len + 1, 1);
     return ptr ? memcpy(ptr, str, s_len) : ptr;
 }
 
-char *
-l_str_catx(char *str, ...)
-{
+char *l_str_catx(char *str, ...) {
     l_assert(str);
     char *arg;
     va_list ap;
@@ -27,8 +23,7 @@ l_str_catx(char *str, ...)
     for (dl = 0; str[dl]; dl++)
         ;
     va_start(ap, str);
-    while ((arg = va_arg(ap, char *)))
-    {
+    while ((arg = va_arg(ap, char *))) {
         for (size_t sl = 0; arg[sl]; sl++) { str[dl++] = arg[sl]; }
     }
     va_end(ap);
@@ -36,19 +31,15 @@ l_str_catx(char *str, ...)
     return str;
 }
 
-char *
-l_int_base_to_str(int num, int base, char *seq, char *out_buff)
-{
+char *l_int_base_to_str(int num, int base, char *seq, char *out_buff) {
     int max = 1, len = 1, idx = 0;
     char *vals = vals = (seq == NULL) ? "0123456789ABCDEF" : seq;
-    while ((max * base) < num)
-    {
+    while ((max * base) < num) {
         max *= base;
         len++;
     }
     char *str = out_buff ? out_buff : calloc(1, len + 1);
-    while (len--)
-    {
+    while (len--) {
         str[idx++] = vals[(num / max)];
         num -= (num / max) * max;
         max /= base;
@@ -56,20 +47,16 @@ l_int_base_to_str(int num, int base, char *seq, char *out_buff)
     return str;
 }
 
-int
-l_strn_to_int_base(const char *str, size_t str_len, int base, char *seq)
-{
+int l_strn_to_int_base(const char *str, size_t str_len, int base, char *seq) {
     l_assert(str);
     l_assert(str_len);
     char *val = seq ? seq : "0123456789ABCDEF";
     int rc = 0;
-    for (size_t i = 0; i < str_len; i++)
-    {
+    for (size_t i = 0; i < str_len; i++) {
         int j = 0;
         for (; j < base && str[i] != val[j]; j++)
             ;
-        if (j == base)
-        {
+        if (j == base) {
             rc = 0;
             break;
         }
@@ -78,50 +65,35 @@ l_strn_to_int_base(const char *str, size_t str_len, int base, char *seq)
     return rc;
 }
 
-int
-l_strn_slice(const char *str, size_t str_len, const char del,
-             size_t *out_slice_len)
-{
+int l_strn_slice(const char *str, size_t str_len, const char del, size_t *out_slice_len) {
     l_assert(str);
     l_assert(str_len);
     l_assert(out_slice_len);
     size_t found = 0;
     size_t off = 0;
-    for (; off < str_len && !found; off++)
-    {
-        found = (str[off] == del ? 1 : 0);
-    }
+    for (; off < str_len && !found; off++) { found = (str[off] == del ? 1 : 0); }
     if (out_slice_len) { *out_slice_len = found ? off - 1 : str_len; }
     return found;
 }
 
-int
-l_strn_is_surrc(const char *str, size_t str_len, const char c)
-{
+int l_strn_is_surrc(const char *str, size_t str_len, const char c) {
     l_assert(str);
     l_assert(str_len);
     return (str[str_len - 1] == c && str[0] == c) ? 1 : 0;
 }
 
-char *
-l_strn_rm_surrc(char *str, size_t str_len, const char c)
-{
+char *l_strn_rm_surrc(char *str, size_t str_len, const char c) {
     l_assert(str);
     l_assert(str_len);
-    if (str[str_len - 1] == c && str[0] == c)
-    {
+    if (str[str_len - 1] == c && str[0] == c) {
         str[0] = 0;
         str[str_len - 1] = 0;
         return str + 1;
-    }
-    else
-    {
+    } else {
         return str;
     }
 }
-char *
-l_strn_trim_left(char *str, size_t str_len)
-{
+char *l_strn_trim_left(char *str, size_t str_len) {
     l_assert(str);
     l_assert(str_len);
     size_t l_off = 0;
@@ -129,29 +101,21 @@ l_strn_trim_left(char *str, size_t str_len)
     return &str[0] + l_off;
 }
 
-char *
-l_strn_trim_right(char *str, size_t str_len)
-{
+char *l_strn_trim_right(char *str, size_t str_len) {
     l_assert(str);
     l_assert(str_len);
-    for (size_t i = str_len - 1; i >= str_len - 1; i--)
-    {
-        if (isspace(str[i]))
-        {
+    for (size_t i = str_len - 1; i >= str_len - 1; i--) {
+        if (isspace(str[i])) {
             str[i] = 0;
             str_len--;
-        }
-        else
-        {
+        } else {
             break;
         }
     }
     return str;
 }
 
-size_t
-l_strn_trim_left_ro(const char *str, size_t str_len)
-{
+size_t l_strn_trim_left_ro(const char *str, size_t str_len) {
     l_assert(str);
     l_assert(str_len);
     size_t i = 0;
@@ -160,47 +124,35 @@ l_strn_trim_left_ro(const char *str, size_t str_len)
     return i;
 }
 
-size_t
-l_strn_trim_right_ro(const char *str, size_t str_len)
-{
+size_t l_strn_trim_right_ro(const char *str, size_t str_len) {
     l_assert(str);
     l_assert(str_len);
-    for (size_t i = str_len - 1; i >= str_len - 1; i--)
-    {
-        if (isspace(str[i])) { str_len--; }
-        else
-        {
+    for (size_t i = str_len - 1; i >= str_len - 1; i--) {
+        if (isspace(str[i])) {
+            str_len--;
+        } else {
             break;
         }
     }
     return str_len;
 }
 
-int
-l_strn_starts_with(const char *haystack, const char *needle,
-                   size_t haystack_len, size_t needle_len)
-{
+int l_strn_starts_with(const char *haystack, const char *needle, size_t haystack_len, size_t needle_len) {
     l_assert(haystack);
     l_assert(needle);
     l_assert(haystack_len);
     l_assert(needle_len);
 
     int rc = (haystack[0] && needle[0] && haystack[0] == needle[0]);
-    for (size_t i = 1; rc && i < haystack_len && i < needle_len; i++)
-    {
-        rc = (haystack[i] == needle[i]);
-    }
+    for (size_t i = 1; rc && i < haystack_len && i < needle_len; i++) { rc = (haystack[i] == needle[i]); }
     return rc;
 }
 
-size_t
-l_strn_char_cnt(const char *str, size_t str_len, const char c)
-{
+size_t l_strn_char_cnt(const char *str, size_t str_len, const char c) {
     l_assert(str);
     l_assert(str_len);
     size_t res = 0;
-    for (size_t i = 0; i < str_len; i++)
-    {
+    for (size_t i = 0; i < str_len; i++) {
         if (str[i] == c) { res++; }
     }
     return res;

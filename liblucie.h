@@ -77,7 +77,7 @@ EXTERN int32_t l_string_compare_case(l_string *str1, l_string *str2);
  * @param str_len The length of the string.
  * @return Pointer to new allocated string.
  */
-EXTERN char * l_strn_dup(const char *str, size_t str_len);
+EXTERN char *l_strn_dup(const char *str, size_t str_len);
 #define l_str_dup(str) l_strn_dup(str, l_cstr_len(str))
 
 /* @brief Concatenates multiple strings into one buffer.
@@ -86,7 +86,7 @@ EXTERN char * l_strn_dup(const char *str, size_t str_len);
  * @param VA_LIST, NULL terminated list of slices (char array only).
  * @return Pointer to str.
  */
-EXTERN char * l_str_catx(char *str, ...);
+EXTERN char *l_str_catx(char *str, ...);
 
 /* @brief Converts a base integer to a string.
  * @param seq Sequence, pass NULL to use the default.
@@ -96,7 +96,7 @@ EXTERN char * l_str_catx(char *str, ...);
  * NULL to have the function alloc this buffer for you.
  * @return Pointer the output string. If out_buff was passed, it is the same.
  */
-EXTERN char * l_int_base_to_str(int num, int base, char *seq, char *out_buff);
+EXTERN char *l_int_base_to_str(int num, int base, char *seq, char *out_buff);
 #define l_int_to_str(num, out_buff) l_int_base_to_str(num, 10, NULL, out_buff)
 
 /* @brief Converts a string to a base integer.
@@ -107,8 +107,7 @@ EXTERN char * l_int_base_to_str(int num, int base, char *seq, char *out_buff);
  * @return Converted number.
  */
 EXTERN int l_strn_to_int_base(const char *str, size_t str_len, int base, char *seq);
-#define l_str_to_int_base(str, base, seq)                                      \
-    l_strn_to_int_base(str, l_cstr_len(str), base, seq)
+#define l_str_to_int_base(str, base, seq) l_strn_to_int_base(str, l_cstr_len(str), base, seq)
 #define l_str_to_int(str) l_strn_to_int_base(str, l_cstr_len(str), 10, NULL)
 #define l_strn_to_int(str, str_len) l_strn_to_int_base(str, str_len, 10, NULL)
 
@@ -121,10 +120,8 @@ EXTERN int l_strn_to_int_base(const char *str, size_t str_len, int base, char *s
  * and set with the length of the slice.
  * @return 1 if the delimiter was found, 0 if not.
  */
-EXTERN int l_strn_slice(const char *str, size_t str_len, const char del,
-             size_t *out_slice_len);
-#define l_str_slice(str, del, out_slice_len)                                   \
-    l_strn_slice(str, l_cstr_len(str), del, out_slice_len)
+EXTERN int l_strn_slice(const char *str, size_t str_len, const char del, size_t *out_slice_len);
+#define l_str_slice(str, del, out_slice_len) l_strn_slice(str, l_cstr_len(str), del, out_slice_len)
 
 /* @brief Checks whenever a string is surronded by a character.
  * Useful for detecting quoted strings.
@@ -143,7 +140,7 @@ EXTERN int l_strn_is_surrc(const char *str, size_t str_len, const char c);
  * @param c: Character to check.
  * @return Pointer to the processed string.
  */
-EXTERN char * l_strn_rm_surrc(char *str, size_t str_len, const char c);
+EXTERN char *l_strn_rm_surrc(char *str, size_t str_len, const char c);
 #define l_str_rm_surrc(str, c) l_strn_rm_surrc(str, l_cstr_len(str), c)
 
 /* @brief Removes leading whitespace from a string.
@@ -151,7 +148,7 @@ EXTERN char * l_strn_rm_surrc(char *str, size_t str_len, const char c);
  * @param str_len The length of the string.
  * @return Pointer to the processed string.
  */
-EXTERN char * l_strn_trim_left(char *str, size_t str_len);
+EXTERN char *l_strn_trim_left(char *str, size_t str_len);
 #define l_str_trim_left(str) l_strn_trim_left(str, l_cstr_len(str))
 
 /* @brief Removes leading whitespace from a string.
@@ -168,7 +165,7 @@ EXTERN size_t l_strn_trim_left_ro(const char *str, size_t str_len);
  * @param str_len The length of the string.
  * @return Pointer to the processed string.
  */
-EXTERN char * l_strn_trim_right(char *str, size_t str_len);
+EXTERN char *l_strn_trim_right(char *str, size_t str_len);
 #define l_str_trim_right(str) l_strn_trim_right(str, l_cstr_len(str))
 
 /* @brief Removes whitespace from the right side of a string.
@@ -187,9 +184,9 @@ EXTERN size_t l_strn_trim_right_ro(const char *str, size_t str_len);
  * @param needle_len: Length of the string to find.
  * @return 1 if "haystack" starts with "needle", 0 if not.
  */
-EXTERN int l_strn_starts_with(const char *haystack, const char *needle,
-                   size_t haystack_len, size_t needle_len);
-#define l_str_starts_with(haystack, needle)                                    \
+EXTERN int l_strn_starts_with(const char *haystack, const char *needle, size_t haystack_len,
+                              size_t needle_len);
+#define l_str_starts_with(haystack, needle)                                                                  \
     l_strn_starts_with(haystack, needle, l_cstr_len(haystack), l_cstr_len(needle))
 
 /* @brief Counts how many time a character is inside a string
