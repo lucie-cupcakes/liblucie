@@ -1,5 +1,5 @@
 CC ?= gcc
-#CWD = $(shell pwd)
+AR ?= ar
 OUTDIR ?= bin
 CSTD ?= -std=c99 -pedantic 
 CWARN ?= -Wall -Wextra
@@ -12,19 +12,25 @@ else
 override CFLAGS ?= -D NDEBUG -s -Ofast -flto -mtune=native
 endif
 
-all: $(OUTDIR) $(OUTDIR)/liblucie.o
+all: $(OUTDIR) $(OUTDIR)/liblucie.a $(OUTDIR)/liblucie.so
 .PHONY: clean format unit_test
 
 $(OUTDIR):
 	test -p $(OUTDIR) || mkdir -p $(OUTDIR)
 
 $(OUTDIR)/%.o: %.c
-	${CC} ${CSTD} ${CWARN} ${CFLAGS} -c -o $@ $<
+	${CC} ${CSTD} ${CWARN} ${CFLAGS} -fPIC -c -o $@ $<
+
+$(OUTDIR)/liblucie.a: $(OUTDIR) $(OBJECTS)
+	${AR} rcs $@ $(OBJECTS)
+
+$(OUTDIR)/liblucie.so: $(OUTDIR) $(OBJECTS)
+	${CC} -shared -o $@ $(OBJECTS)
 
 $(OUTDIR)/test: $(OUTDIR) $(OBJECTS)
 	${CC} ${CSTD} ${CFLAGS} -o $@ $(OBJECTS) 
 
-#This is a hack - @TODO: Fix
+This is a hack - @TODO: Fix
 unit_test:
 	make all
 	make $(OUTDIR)/test
