@@ -1,15 +1,14 @@
-﻿---
 AlignAfterOpenBracket: Align
 AllowShortBlocksOnASingleLine: 'true'
 AllowShortIfStatementsOnASingleLine: WithoutElse
 AllowShortLoopsOnASingleLine: 'true'
-AlwaysBreakAfterReturnType: All
-BreakBeforeBraces: Allman
-ColumnLimit: '80'
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+BreakBeforeBraces: Attach
+ColumnLimit: '110'
 IndentWidth: '4'
 IndentWrappedFunctionNames: 'false'
 PointerAlignment: Right
 TabWidth: '4'
 UseTab: Never
-
-...
+SortIncludes: false
